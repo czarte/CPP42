@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
 
 int main(int argc, char** argv) {
 	if (argc < 5) {
@@ -12,29 +13,31 @@ int main(int argc, char** argv) {
 	}
 	std::string word = argv[3];
 	std::string replace = argv[4];
-	std::string buffer;
-	std::string filename = argv[1];
+	std::string buffer = "";
 	std::fstream fs;
-	fs.open (filename, std::fstream::in);
-	char prev = '\0';
-	while (fs >> buffer) {
-		if (prev == '\n') {  // Check if the last character was a newline
-			std::cout << std::endl;
-		}
-		int pos = buffer.find(word);
-		if (pos != -1) {
-			for (int n = 0;  n < pos; n++) {
-				std::cout << buffer[n];
+	fs.open (argv[1], std::fstream::in);
+	int i = 0;
+	char ch;
+	while (fs.get(ch)) {
+		if (ch == word[i]) {
+			buffer.push_back(ch);
+			i++;
+			if (buffer.length() == word.length() && buffer == word) {
+				std::cout << replace;
+				buffer.erase();
+				i = 0;
+			} else if (buffer.length() == word.length() && buffer != word) {
+				std::cout << buffer;
+				buffer.erase();
 			}
-			for (unsigned long m = 0; m < replace.length(); ++m) {
-				std::cout << replace[m];
-			}
-			std::cout << " ";
-			buffer.erase();
 		} else {
-			std::cout << buffer << " ";
+			i = 0;
+			if (!buffer.empty()) {
+				std::cout << buffer;
+			}
+			buffer.erase();
+			std::cout << ch;
 		}
-		prev = fs.peek();
 	}
 	std::cout << std::endl;
 	fs.close();
