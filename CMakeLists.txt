@@ -16,4 +16,6 @@ add_executable(CPP01 ex00/main.cpp
         ex03/HumanA.cpp
         ex03/HumanA.h
         ex03/HumanB.cpp
-        ex03/HumanB.h)
+        ex03/HumanB.h
+        CPP01/ex05/Harl.cpp
+        CPP01/ex05/Harl.h)
