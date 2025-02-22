@@ -24,6 +24,8 @@ class Fixed {
 		friend std::ostream& operator<<(std::ostream&, Fixed const &src);
 		friend bool operator<(Fixed const &src1, Fixed const &src2);
 		friend float operator*(Fixed const &src1, Fixed const &src2);
+		Fixed& operator++();
+		Fixed operator++(int);
 };
 
 
