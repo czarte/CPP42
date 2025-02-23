@@ -20,4 +20,7 @@ add_executable(CPP01 ex00/main.cpp
         CPP01/ex05/Harl.cpp
         CPP01/ex05/Harl.h
         CPP02/ex00/Fixed.cpp
-        CPP02/ex00/Fixed.h)
+        CPP02/ex00/Fixed.h
+        CPP03/ex00/ClapTrap.cpp
+        CPP03/ex00/ClapTrap.h
+        CPP03/ex00/main.cpp)

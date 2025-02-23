@@ -1,10 +1,10 @@
-SRC = Fixed.cpp main.cpp
+SRC = ClapTrap.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
 CC = g++
 RM = rm -f
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
-NAME = fixed
+NAME = claptrap
 
 all: $(NAME)
 
