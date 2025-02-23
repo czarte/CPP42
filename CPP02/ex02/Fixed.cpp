@@ -56,7 +56,6 @@ bool operator!=(Fixed const &src1, Fixed const &src2) {
 }
 
 float operator+(Fixed const &src1, Fixed const &src2) {
-	//std::cout << "+ overload was called" << std::endl;
 	return src1.toFloat() + src2.toFloat();
 }
 
@@ -81,6 +80,18 @@ Fixed Fixed::operator++(int) {
 	Fixed tmp;
 	tmp = *this;
 	operator++();
+	return tmp;
+}
+
+Fixed& Fixed::operator--() {
+	this->value--;
+	return *this;
+}
+
+Fixed Fixed::operator--(int) {
+	Fixed tmp;
+	tmp = *this;
+	operator--();
 	return tmp;
 }
 
@@ -112,6 +123,22 @@ Fixed const& Fixed::max(Fixed const &src1, Fixed const &src2) {
 
 Fixed& Fixed::max(Fixed &src1, Fixed &src2) {
 	if (src1.toFloat() > src2.toFloat()) {
+		return src1;
+	} else {
+		return src2;
+	}
+}
+
+Fixed const& Fixed::min(Fixed const &src1, Fixed const &src2) {
+	if (src1.toFloat() < src2.toFloat()) {
+		return src1;
+	} else {
+		return src2;
+	}
+}
+
+Fixed& Fixed::min(Fixed &src1, Fixed &src2) {
+	if (src1.toFloat() < src2.toFloat()) {
 		return src1;
 	} else {
 		return src2;

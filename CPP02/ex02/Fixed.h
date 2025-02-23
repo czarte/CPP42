@@ -24,8 +24,13 @@ class Fixed {
 
 		Fixed& operator++();
 		Fixed operator++(int);
+		Fixed& operator--();
+		Fixed operator--(int);
 		static Fixed const& max(Fixed const &src1, Fixed const &src2);
 		static Fixed& max(Fixed &src1, Fixed &src2);
+		static Fixed const& min(Fixed const &src1, Fixed const &src2);
+		static Fixed& min(Fixed &src1, Fixed &src2);
+
 };
 
 	std::ostream& operator<<(std::ostream&, Fixed const &src);
