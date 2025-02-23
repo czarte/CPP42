@@ -35,8 +35,41 @@ bool operator<(Fixed const &src1, Fixed const &src2) {
 	return src1.getRawBits() < src2.getRawBits();
 }
 
+bool operator>(Fixed const &src1, Fixed const &src2) {
+	return src1.getRawBits() > src2.getRawBits();
+}
+
+bool operator>=(Fixed const &src1, Fixed const &src2) {
+	return src1.getRawBits() >= src2.getRawBits();
+}
+
+bool operator<=(Fixed const &src1, Fixed const &src2) {
+	return src1.getRawBits() <= src2.getRawBits();
+}
+
+bool operator==(Fixed const &src1, Fixed const &src2) {
+	return src1.getRawBits() == src2.getRawBits();
+}
+
+bool operator!=(Fixed const &src1, Fixed const &src2) {
+	return src1.getRawBits() != src2.getRawBits();
+}
+
+float operator+(Fixed const &src1, Fixed const &src2) {
+	//std::cout << "+ overload was called" << std::endl;
+	return src1.toFloat() + src2.toFloat();
+}
+
+float operator-(Fixed const &src1, Fixed const &src2) {
+	return src1.toFloat() - src2.toFloat();
+}
+
 float operator*(Fixed const &src1, Fixed const &src2) {
 	return src1.toFloat() * src2.toFloat();
+}
+
+float operator/(Fixed const &src1, Fixed const &src2) {
+	return src1.toFloat() / src2.toFloat();
 }
 
 Fixed& Fixed::operator++() {
@@ -67,4 +100,20 @@ int Fixed::toInt()const {
 
 float Fixed::toFloat() const {
 	return (float)this->value / (float)(1 << fract_bits);
+}
+
+Fixed const& Fixed::max(Fixed const &src1, Fixed const &src2) {
+	if (src1.toFloat() > src2.toFloat()) {
+		return src1;
+	} else {
+		return src2;
+	}
+}
+
+Fixed& Fixed::max(Fixed &src1, Fixed &src2) {
+	if (src1.toFloat() > src2.toFloat()) {
+		return src1;
+	} else {
+		return src2;
+	}
 }

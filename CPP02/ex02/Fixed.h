@@ -21,12 +21,24 @@ class Fixed {
 		void setRawBits(int const raw);
 		int toInt()const;
 		float toFloat() const;
-		friend std::ostream& operator<<(std::ostream&, Fixed const &src);
-		friend bool operator<(Fixed const &src1, Fixed const &src2);
-		friend float operator*(Fixed const &src1, Fixed const &src2);
+
 		Fixed& operator++();
 		Fixed operator++(int);
+		static Fixed const& max(Fixed const &src1, Fixed const &src2);
+		static Fixed& max(Fixed &src1, Fixed &src2);
 };
+
+	std::ostream& operator<<(std::ostream&, Fixed const &src);
+	bool operator<(Fixed const &src1, Fixed const &src2);
+	bool operator>(Fixed const &src1, Fixed const &src2);
+	bool operator>=(Fixed const &src1, Fixed const &src2);
+	bool operator<=(Fixed const &src1, Fixed const &src2);
+	bool operator==(Fixed const &src1, Fixed const &src2);
+	bool operator!=(Fixed const &src1, Fixed const &src2);
+	float operator+(Fixed const &src1, Fixed const &src2);
+	float operator-(Fixed const &src1, Fixed const &src2);
+	float operator*(Fixed const &src1, Fixed const &src2);
+	float operator/(Fixed const &src1, Fixed const &src2);
 
 
 #endif //CPP42_FIXED_H
