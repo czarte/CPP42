@@ -23,4 +23,9 @@ add_executable(CPP01 ex00/main.cpp
         CPP02/ex00/Fixed.h
         CPP03/ex00/ClapTrap.cpp
         CPP03/ex00/ClapTrap.h
-        CPP03/ex00/main.cpp)
+        CPP03/ex00/main.cpp
+        CPP03/ex01/ScavTrap.cpp
+        CPP03/ex01/ScavTrap.h
+        CPP03/ex01/ScavTrap.h
+        CPP03/ex01/ScavTrap.cpp
+        CPP03/ex01/ScavTrap.h)
