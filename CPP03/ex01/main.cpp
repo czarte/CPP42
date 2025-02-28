@@ -5,9 +5,10 @@
 #include "ScavTrap.h"
 
 int main(void) {
-	ClapTrap a("dement");
-	ScavTrap b("idiot");
+	ClapTrap a;
+	ScavTrap b("scavanger");
 
-	a.attack("hovno");
+	a.attack("bubu");
+    b.attack("kuku");
 	return (0);
 }

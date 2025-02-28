@@ -7,8 +7,9 @@
 
 #include "ClapTrap.h"
 
-class ScavTrap: ClapTrap {
+class ScavTrap : public ClapTrap {
 	public:
+		~ScavTrap();
 		ScavTrap(std::string name);
 		void guardGate();
 };

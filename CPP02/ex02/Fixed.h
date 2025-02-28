@@ -5,6 +5,7 @@
 #ifndef CPP42_FIXED_H
 #define CPP42_FIXED_H
 #include <iostream>
+#include <cmath>
 
 class Fixed {
 	private:
