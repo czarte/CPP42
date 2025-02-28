@@ -4,8 +4,7 @@
 
 #include "ScavTrap.h"
 
-ScavTrap::ScavTrap(std::string name) {
-	this->name = name;
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
     this->hitpoints = 100;
     this->energy = 50;
     this->damage = 20;

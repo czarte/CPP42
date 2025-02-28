@@ -28,4 +28,6 @@ add_executable(CPP01 ex00/main.cpp
         CPP03/ex01/ScavTrap.h
         CPP03/ex01/ScavTrap.h
         CPP03/ex01/ScavTrap.cpp
-        CPP03/ex01/ScavTrap.h)
+        CPP03/ex01/ScavTrap.h
+        CPP03/ex02/FragTrap.cpp
+        CPP03/ex02/FragTrap.h)
