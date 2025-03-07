@@ -31,4 +31,11 @@ add_executable(CPP01 ex00/main.cpp
         CPP03/ex01/ScavTrap.h
         CPP03/ex02/FragTrap.cpp
         CPP03/ex02/FragTrap.h CPP01/ex04/Read.cpp CPP01/ex04/Read.h CPP01/ex04/Write.cpp CPP01/ex04/Write.h
-        CPP01/ex04/main.cpp)
+        CPP01/ex04/main.cpp
+        CPP04/ex00/main.cpp
+        CPP04/ex00/Animal.cpp
+        CPP04/ex00/Animal.h
+        CPP04/ex00/Dog.cpp
+        CPP04/ex00/Dog.h
+        CPP04/ex00/Cat.cpp
+        CPP04/ex00/Cat.h)
