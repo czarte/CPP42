@@ -19,12 +19,10 @@ void Read::read_file(std::string word, std::string replace, Write &write) {
             buffer.push_back(ch);
             i++;
             if (buffer.length() == word.length() && buffer == word) {
-                //std::cout << replace;
                 write.write_to_file(replace);
                 buffer.erase();
                 i = 0;
             } else if (buffer.length() == word.length() && buffer != word) {
-                //std::cout << buffer;
                 write.write_to_file(buffer);
                 buffer.erase();
             }
@@ -38,7 +36,6 @@ void Read::read_file(std::string word, std::string replace, Write &write) {
             std::string s = "";
             s.push_back(ch);
             write.write_to_file(s);
-            //std::cout << ch;
         }
     }
 }
