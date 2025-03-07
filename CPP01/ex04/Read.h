@@ -5,17 +5,25 @@
 #ifndef CPP42_READ_H
 #define CPP42_READ_H
 
+#include <iostream>
+#include <fstream>
+#include <string>
+#include "Write.h"
 
 class Read {
     private:
-        std::string file_name;
+        const char* file_name;
         std::string buffer;
         std::fstream fs;
     public:
-        Read(std::string file_name);
+        Read(const char* file_name);
         ~Read();
         std::fstream open_file();
         void close_file();
+        std::string get_buffer();
+        void empty_buffer();
+        void read_file(std::string find, std::string replace, Write &write);
+
 };
 
 

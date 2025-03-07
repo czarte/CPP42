@@ -5,11 +5,18 @@
 #ifndef CPP42_WRITE_H
 #define CPP42_WRITE_H
 
+#include <iostream>
+#include <fstream>
+#include <string>
 
 class Write {
     private:
-        std::string file_name;
-        std::string buffer;
+        const char* file_name;
+        std::fstream fs_out;
+    public:
+        Write(const char* file_name);
+        ~Write();
+        void write_to_file(std::string to_write);
 };
 
 

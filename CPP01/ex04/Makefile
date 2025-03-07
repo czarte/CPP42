@@ -1,4 +1,4 @@
-SRC = main.cpp
+SRC = main.cpp Write.cpp Read.cpp
 OBJ = $(SRC:.cpp=.o)
 CC = g++
 RM = rm -f
