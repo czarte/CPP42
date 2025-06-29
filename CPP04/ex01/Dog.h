@@ -7,7 +7,7 @@
 
 #include "Animal.h"
 
-class Dog : public Animal {
+Class Dog : public Animal {
     private:
         Brain* brain;
     public:

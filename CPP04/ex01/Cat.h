@@ -7,7 +7,10 @@
 
 #include "Animal.h"
 
-class Cat : public Animal {
+//TODO assignment operator Cat &operator=(const Cat &src);
+// and copy constructor Cat(Cat const &copy);
+
+Class Cat : public Animal {
     private:
       Brain* brain;
     public:
