@@ -22,8 +22,9 @@ class Fixed {
 		void setRawBits(int const raw);
 		int toInt()const;
 		float toFloat() const;
-		friend std::ostream& operator<<(std::ostream&, Fixed const &src);
 };
+
+	std::ostream& operator<<(std::ostream&, Fixed const &src);
 
 
 #endif //CPP42_FIXED_H

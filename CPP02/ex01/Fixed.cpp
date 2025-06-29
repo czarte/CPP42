@@ -51,7 +51,7 @@ void Fixed::setRawBits(const int raw) {
 	this->value = raw;
 }
 
-int Fixed::toInt()const {
+int Fixed::toInt() const {
 	return (this->value >> fract_bits);
 }
 

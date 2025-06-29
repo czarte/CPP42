@@ -3,12 +3,17 @@
 //
 
 #include "Zombie.h"
+#include <sstream>
+
 
 Zombie*  Zombie::zombieHorde( int N, std::string name) {
 	Zombie* zombies = new Zombie[N];
 
 	for (int i = 0; i < N; ++i) {
-		zombies[i].nameZombie(name);
+		std::ostringstream oss;
+        oss << "zombie " << i + 1 << ' ' << name;
+        std::string thisname = oss.str();
+		zombies[i].nameZombie(thisname);
 	}
 
 	return zombies;

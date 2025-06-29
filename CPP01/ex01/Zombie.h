@@ -20,9 +20,6 @@ class Zombie {
 		static void randomChump( std::string name );
 		void nameZombie(const std::string& name);
 		static Zombie*  zombieHorde( int N, std::string name);
-		static void addZombieNext(Zombie* zmb, Zombie* next);
-		Zombie* newZombieMember(std::string name);
-		Zombie* nextZombie();
 };
 
 #endif //CPP01_ZOMBIE_H
