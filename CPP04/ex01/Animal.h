@@ -11,6 +11,7 @@
 class Animal {
     protected:
       std::string type;
+      Brain* brain;
     public:
       Animal();
       virtual ~Animal();

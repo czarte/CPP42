@@ -10,7 +10,7 @@
 //TODO assignment operator Cat &operator=(const Cat &src);
 // and copy constructor Cat(Cat const &copy);
 
-Class Cat : public Animal {
+class Cat : public Animal {
     private:
       Brain* brain;
     public:
@@ -24,3 +24,5 @@ Class Cat : public Animal {
 
 
 #endif //CAT_H
+
+
