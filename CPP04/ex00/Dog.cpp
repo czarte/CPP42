@@ -4,8 +4,7 @@
 
 #include "Dog.h"
 
-Dog::Dog(): Animal() {
-  this->setType("Dog");
+Dog::Dog(): Animal("Dog") {
   std::cout << "Dog::Dog()" << std::endl;
 }
 Dog::~Dog() {
