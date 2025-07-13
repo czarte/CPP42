@@ -64,3 +64,8 @@ std::string Dog::getType() const {
 void Dog::makeSound() const {
   std::cout << "Dog::makeSound()" << std::endl;
 }
+
+Brain &Dog::getBrain(void) const
+{
+	return (*this->brain);
+}

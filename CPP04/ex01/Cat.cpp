@@ -43,3 +43,8 @@ void Cat::setType(std::string type) {
 void Cat::makeSound() const {
   std::cout << "Cat::makeSound()" << std::endl;
 }
+
+Brain &Cat::getBrain(void) const
+{
+	return (*this->brain);
+}

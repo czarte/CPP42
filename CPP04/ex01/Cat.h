@@ -20,6 +20,7 @@ class Cat : public Animal {
 		Cat &operator=(const Cat &other);
 		~Cat();
 		std::string getType() const;
+		Brain 				&getBrain(void) const;
 		void setType(std::string type);
 		void makeSound() const;
 };

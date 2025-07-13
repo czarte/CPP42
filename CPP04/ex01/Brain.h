@@ -11,8 +11,10 @@ class Brain {
     private:
       std::string ideas[100];
     public:
-      Brain();
-      ~Brain();
+      	Brain();
+      	~Brain();
+		void setIdea(std::string const &idea, int const &index);
+		std::string getIdea(int const &index);
 };
 
 
