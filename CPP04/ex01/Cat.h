@@ -12,13 +12,16 @@
 
 class Cat : public Animal {
     private:
-      Brain* brain;
+      	Brain* brain;
     public:
-      Cat();
-      ~Cat();
-      std::string getType() const;
-      void setType(std::string type);
-      void makeSound() const;
+      	Cat();
+		Cat(std::string type);
+		Cat(const Cat &other);
+		Cat &operator=(const Cat &other);
+		~Cat();
+		std::string getType() const;
+		void setType(std::string type);
+		void makeSound() const;
 };
 
 

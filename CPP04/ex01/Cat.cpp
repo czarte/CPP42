@@ -4,10 +4,27 @@
 
 #include "Cat.h"
 
-Cat::Cat(): Animal() {
-  this->setType("Cat");
-  this->brain = new Brain();
+Cat::Cat() : Animal("Cat") {
+	this->brain = new Brain();
   std::cout << "Cat::Cat()" << std::endl;
+}
+
+Cat::Cat(std::string type) : Animal(type)  {
+	this->brain = new Brain();
+	std::cout << "Cat::Cat(type)" << std::endl;
+}
+
+Cat::Cat(const Cat &other) : Animal(other) {
+	this->brain = new Brain();
+	std::cout << "Cat::Cat(const Cat &other)" << std::endl;
+}
+
+Cat &Cat::operator=(const Cat &other) {
+	if (this != &other) {
+		*this->brain = *other.brain;
+	}
+	std::cout << "Cat::Cat &operator=(const Cat &other)" << std::endl;
+	return (*this);
 }
 
 Cat::~Cat() {

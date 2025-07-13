@@ -11,11 +11,17 @@ class Dog : public Animal {
     private:
         Brain* brain;
     public:
-      Dog();
-      ~Dog();
-      std::string getType() const;
-      void setType(std::string type);
-      void makeSound() const;
+      	Dog();
+		Dog(std::string type);
+		Dog(const Dog &other);
+		Dog(Dog &other);
+		Dog(const Animal &other);
+		Dog &operator=(const Dog &other);
+		Dog &operator=(const Animal &other);
+		~Dog();
+		std::string getType() const;
+		void setType(std::string type);
+		void makeSound() const;
 };
 
 
