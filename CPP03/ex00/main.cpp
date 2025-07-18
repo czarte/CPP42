@@ -7,5 +7,7 @@
 int main(void) {
 	ClapTrap a("dement");
 	a.attack("hovno");
+    a.takeDamage(10);
+    a.beRepaired(5);
 	return (0);
 }

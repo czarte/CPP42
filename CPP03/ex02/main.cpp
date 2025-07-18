@@ -9,7 +9,9 @@ int main(void) {
 	ClapTrap a;
 	ScavTrap b("scavanger");
 	FragTrap c("fragger");
+    FragTrap d = c;
 
+    d.highFivesGuys();
 	a.attack("bubu");
     b.attack("kuku");
 	c.attack("susu");

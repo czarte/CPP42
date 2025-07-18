@@ -4,13 +4,27 @@
 
 #include "ClapTrap.h"
 
-ClapTrap::ClapTrap(std::string name) {
-  this->name = name;
+ClapTrap::ClapTrap(): name("ClapTrap"), hitpoints(10), energy(10), damage(0) {
+  std::cout << "ClapTrap Default Constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(): hitpoints(10), energy(10), damage(0) {
-  	this->name = "ClapTrap";
-	std::cout << "Default Constructor called" << std::endl;
+ClapTrap::ClapTrap(std::string name): name(name), hitpoints(10), energy(10), damage(0) {
+	std::cout << "ClapTrap Parametrized Constructor called" << std::endl;
+}
+
+ClapTrap::ClapTrap(const ClapTrap &other) : name(other.name), hitpoints(10), energy(10), damage(0) {
+	std::cout << "ClapTrap::ClapTrap(const ClapTrap &other)" << std::endl;
+}
+
+ClapTrap &ClapTrap::operator=(const ClapTrap &other) {
+	std::cout << "ClapTrap::ClapTrap &operator=(const ClapTrap &other)" << std::endl;
+	if (this != &other) {
+		this->name = other.name;
+        this->hitpoints = other.hitpoints;
+        this->energy = other.energy;
+        this->damage = other.damage;
+	}
+	return (*this);
 }
 
 ClapTrap::~ClapTrap() {
@@ -23,4 +37,16 @@ void ClapTrap::attack(const std::string &target) {
 		<< target << ", causing "
 		<< this->damage << " points of damage!"
 		<< std::endl;
+}
+
+void ClapTrap::takeDamage(unsigned int damage) {
+	std::cout << "ClapTrap "
+		<< this->name << " took damage "
+		<< damage << std::endl;
+}
+
+void ClapTrap::beRepaired(unsigned int healing) {
+	std::cout << "ClapTrap "
+		<< this->name << " is repaired by "
+		<< healing << std::endl;
 }

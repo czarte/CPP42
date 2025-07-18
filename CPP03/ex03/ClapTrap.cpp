@@ -50,3 +50,7 @@ void ClapTrap::beRepaired(unsigned int healing) {
 		<< this->name << " is repaired by "
 		<< healing << std::endl;
 }
+
+std::string ClapTrap::getName(void) {
+  return this->name;
+}

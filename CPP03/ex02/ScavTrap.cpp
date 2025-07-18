@@ -4,15 +4,48 @@
 
 #include "ScavTrap.h"
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
-    this->hitpoints = 100;
-    this->energy = 50;
-    this->damage = 20;
-	std::cout << "ScavTrap Constructor called" << std::endl;
+ScavTrap::ScavTrap(): ClapTrap("ScavTrap") {
+	hitpoints = 100;
+    energy = 50;
+    damage = 20;
+	std::cout << "ScavTrap Default Constructor called" << std::endl;
+}
+
+ScavTrap::ScavTrap(std::string name): ClapTrap(name) {
+	hitpoints = 100;
+	energy = 50;
+	damage = 20;
+	std::cout << "ScavTrap Parametrized Constructor called" << std::endl;
+}
+
+ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other.name) {
+	this->hitpoints = other.hitpoints;
+    this->energy = other.energy;
+    this->damage = other.damage;
+	std::cout << "ScavTrap::ScavTrap(const ScavTrap &other)" << std::endl;
+}
+
+ScavTrap &ScavTrap::operator=(const ScavTrap &other) {
+	std::cout << "ScavTrap::ScavTrap &operator=(const ScavTrap &other)" << std::endl;
+	if (this != &other) {
+		this->name = other.name;
+        this->hitpoints = other.hitpoints;
+        this->energy = other.energy;
+        this->damage = other.damage;
+	}
+	return (*this);
 }
 
 ScavTrap::~ScavTrap() {
   std::cout << "ScavTrap Destructor called" << std::endl;
+}
+
+void ScavTrap::attack(const std::string &target) {
+	std::cout << "ScavTrap "
+		<< this->name << " attacks "
+		<< target << ", causing "
+		<< this->damage << " points of damage!"
+		<< std::endl;
 }
 
 void ScavTrap::guardGate() {

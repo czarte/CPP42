@@ -8,11 +8,12 @@
 #include <iostream>
 
 class ClapTrap {
-	public:
+  	protected:
 		std::string name;
 		unsigned int hitpoints;
 		unsigned int energy;
 		unsigned int damage;
+	public:
         ClapTrap();
 		ClapTrap(std::string name);
 		ClapTrap(const ClapTrap &other);
@@ -21,6 +22,7 @@ class ClapTrap {
 		void attack(const std::string& target);
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);
+		std::string getName(void);
 };
 
 

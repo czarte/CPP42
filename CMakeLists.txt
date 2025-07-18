@@ -44,4 +44,7 @@ add_executable(CPP01 ex00/main.cpp
         CPP04/ex00/WrongCat.cpp
         CPP04/ex00/WrongCat.h
         CPP04/ex01/Brain.cpp
-        CPP04/ex01/Brain.h)
+        CPP04/ex01/Brain.h
+        CPP03/ex01/ScavTrap.h
+        CPP03/ex03/DiamondTrap.cpp
+        CPP03/ex03/DiamondTrap.h)
