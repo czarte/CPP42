@@ -4,21 +4,18 @@
 
 #include "ScavTrap.h"
 
-ScavTrap::ScavTrap(): ClapTrap("ScavTrap") {
-	hitpoints = 200;
-    energy = 100;
-    damage = 250;
+ScavTrap::ScavTrap(): ClapTrap("ScavTrap", 200, 100, 250) {
+	this->hitpoints = 200;
+    this->energy = 100;
+    this->damage = 250;
 	std::cout << "ScavTrap Default Constructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string name): ClapTrap(name) {
-	hitpoints = 200;
-	energy = 100;
-	damage = 250;
+ScavTrap::ScavTrap(std::string name): ClapTrap(name, 200, 100, 250) {
 	std::cout << "ScavTrap Parametrized Constructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other.name) {
+ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other.name, other.hitpoints, other.energy, other.damage) {
 	this->hitpoints = other.hitpoints;
     this->energy = other.energy;
     this->damage = other.damage;

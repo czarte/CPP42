@@ -4,9 +4,40 @@
 
 #include "Dog.h"
 
-Dog::Dog(): Animal("Dog") {
+Dog::Dog() : Animal("Dog") {
   std::cout << "Dog::Dog()" << std::endl;
 }
+
+Dog::Dog(std::string type) : Animal(type) {
+  std::cout << "Dog::Dog(type)" << std::endl;
+}
+
+Dog::Dog(const Dog &other) : Animal(other) {
+  std::cout << "Dog::Dog(const Dog &other)" << std::endl;
+}
+
+Dog::Dog(Dog &other) : Animal(other) {
+  std::cout << "Dog::Dog(Dog &other)" << std::endl;
+}
+
+Dog::Dog(const Animal &other) : Animal(other) {
+  std::cout << "Dog::Dog(const Dog &other)" << std::endl;
+}
+
+Dog &Dog::operator=(const Dog &other) {
+  std::cout << "Dog::Dog &operator=(const Dog &other)" << std::endl;
+  Animal::operator=(other);
+  return (*this);
+}
+
+Dog &Dog::operator=(const Animal &other) {
+  std::cout << "Dog::Dog &operator=(const Animal &other)" << std::endl;
+  if (this != &other) {
+    this->type = other.getType();
+  }
+  return (*this);
+}
+
 Dog::~Dog() {
   std::cout << "Dog::~Dog()" << std::endl;
 }

@@ -16,7 +16,9 @@ int main(void) {
 	std::cout << "---------------" << std::endl;
 	x.attack("scavanger");
     c.guardGate();
+    b.takeDamage(20);
 	a.attack("bubu");
+    c.beRepaired(10);
     b.attack("kuku");
     b.guardGate();
 	return (0);

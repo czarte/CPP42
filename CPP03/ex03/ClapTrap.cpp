@@ -8,7 +8,11 @@ ClapTrap::ClapTrap(): name("ClapTrap"), hitpoints(10), energy(10), damage(0) {
   std::cout << "ClapTrap Default Constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string name): name(name), hitpoints(10), energy(10), damage(0) {
+ClapTrap::ClapTrap(std::string name, int hitpoits, int energy, int damage): name(name), hitpoints(hitpoits), energy(energy), damage(damage) {
+	std::cout << "ClapTrap Parametrized Constructor called" << std::endl;
+}
+
+ClapTrap::ClapTrap(std::string name): name(name) {
 	std::cout << "ClapTrap Parametrized Constructor called" << std::endl;
 }
 

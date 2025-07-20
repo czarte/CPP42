@@ -23,6 +23,7 @@ class Dog : public Animal {
 		Brain 				&getBrain(void) const;
 		void setType(std::string type);
 		void makeSound() const;
+        void tell(int i) const;
 };
 
 

@@ -15,13 +15,17 @@ Dog::Dog(std::string type) : Animal(type) {
 }
 
 Dog::Dog(const Dog &other) : Animal(other) {
-	std::cout << "Dog::Dog(const Dog &other)" << std::endl;
-	this->brain = new Brain();
+	std::cout << "here Dog::Dog(const Dog &other)" << std::endl;
+	if (this != &other) {
+		*this->brain = *other.brain;
+	}
 }
 
 Dog::Dog(Dog &other) : Animal(other) {
 	std::cout << "Dog::Dog(Dog &other)" << std::endl;
-	this->brain = new Brain();
+	if (this != &other) {
+		*this->brain = *other.brain;
+	}
 }
 
 Dog::Dog(const Animal &other) : Animal(other) {
@@ -31,7 +35,7 @@ Dog::Dog(const Animal &other) : Animal(other) {
 
 Dog &Dog::operator=(const Dog &other) {
 	std::cout << "Dog::Dog &operator=(const Dog &other)" << std::endl;
-	Animal::operator=(other);
+	//Animal::operator=(other);
 	if (this != &other) {
 		*this->brain = *other.brain;
 	}
@@ -43,8 +47,8 @@ Dog &Dog::operator=(const Animal &other) {
 	if (this != &other) {
 		this->type = other.getType();
 	}
-	delete this->brain;
-	this->brain = new Brain();
+//	delete this->brain;
+//	this->brain = new Brain();
 	return (*this);
 }
 
@@ -68,4 +72,8 @@ void Dog::makeSound() const {
 Brain &Dog::getBrain(void) const
 {
 	return (*this->brain);
+}
+
+void Dog::tell(int i) const {
+  std::cout << this->brain->getIdea(i) << std::endl;
 }

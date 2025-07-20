@@ -5,20 +5,18 @@
 #include "FragTrap.h"
 
 FragTrap::FragTrap(): ClapTrap("FragTrap") {
-	hitpoints = 8000;
-	energy = 300;
-	damage = 800;
+	this->hitpoints = 8000;
+	this->damage = 800;
 	std::cout << "FragTrap Default Constructor called" << std::endl;
 }
 
 FragTrap::FragTrap(std::string name): ClapTrap(name) {
-	hitpoints = 8000;
-	energy = 300;
-	damage = 800;
+	this->hitpoints = 8000;
+	this->damage = 800;
 	std::cout << "FragTrap Parametrized Constructor called" << std::endl;
 }
 
-FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other.name) {
+FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other.name, other.hitpoints, other.energy, other.damage) {
 	this->hitpoints = other.hitpoints;
 	this->energy = other.energy;
 	this->damage = other.damage;

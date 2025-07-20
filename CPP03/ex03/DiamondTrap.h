@@ -10,10 +10,7 @@
 
 class DiamondTrap : public virtual ScavTrap, public virtual FragTrap {
 	private:
-    	std::string _name;
-        int _energy;
-        int _damage;
-        int _hitpoints;
+    	std::string name;
     public:
 	    DiamondTrap(void);
 	    DiamondTrap(std::string name);
