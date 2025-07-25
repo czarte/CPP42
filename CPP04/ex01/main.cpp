@@ -55,6 +55,7 @@ int main()
         std::cout << "---------------DogA---------------\n";
 		dogA->tell(0);
 		dogA->tell(1);
+        dogA->tell(2);
         std::cout << "---------------Delete DogA+B------\n";
         delete dogC;
 		delete dogA;
