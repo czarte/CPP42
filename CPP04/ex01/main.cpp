@@ -11,6 +11,8 @@
 
 int main()
 {
+  	Animal *aniA = new Animal();
+    aniA->makeSound();
 	{
 		const Animal *lotsOfAnimals[N_ANIMALS];
 

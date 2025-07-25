@@ -4,11 +4,38 @@
 
 #include "Dog.h"
 
-Dog::Dog(): Animal() {
-  this->setType("Dog");
-  this->brain = new Brain();
-  std::cout << "Dog::Dog()" << std::endl;
+Dog::Dog() : Animal("Dog") {
+	std::cout << "Dog::Dog()" << std::endl;
+	this->brain = new Brain();
 }
+
+Dog::Dog(std::string type) : Animal(type) {
+	std::cout << "Dog::Dog(type)" << std::endl;
+	this->brain = new Brain();
+}
+
+//Dog::Dog(const Dog &other) : Animal(other) {
+//	std::cout << "here Dog::Dog(const Dog &other)" << std::endl;
+//	this->brain = new Brain(*other.brain);
+//}
+
+Dog::Dog(Dog &other) : Animal(other) {
+	std::cout << "Dog::Dog(Dog &other)" << std::endl;
+    this->brain = new Brain(*other.brain);
+}
+
+//Dog::Dog(const Animal &other) : Animal(other) {
+//	std::cout << "Dog::Dog(const Dog &other)" << std::endl;
+//	this->brain = new Brain();
+//}
+
+Dog &Dog::operator=(Dog &other) {
+	std::cout << "Dog::Dog &operator=(const Dog &other)" << std::endl;
+	//Animal::operator=(other);
+	this->brain = new Brain(*other.brain);
+	return (*this);
+}
+
 Dog::~Dog() {
   delete this->brain;
   std::cout << "Dog::~Dog()" << std::endl;
@@ -24,4 +51,13 @@ std::string Dog::getType() const {
 
 void Dog::makeSound() const {
   std::cout << "Dog::makeSound()" << std::endl;
+}
+
+Brain &Dog::getBrain(void) const
+{
+	return (*this->brain);
+}
+
+void Dog::tell(int i) const {
+  std::cout << this->brain->getIdea(i) << std::endl;
 }

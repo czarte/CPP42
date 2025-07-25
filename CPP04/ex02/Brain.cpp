@@ -11,6 +11,33 @@ Brain::Brain() {
   std::cout << "Brain Constructor" << std::endl;
 }
 
+Brain::Brain(Brain &other) {
+	std::cout << "Brain::Brain(Brain &other)" << std::endl;
+	if (this != &other) {
+		*this->ideas = *other.ideas;
+	}
+}
+
+Brain &Brain::operator=(Brain &other) {
+	std::cout << "Brain::Brain &operator=(Brain &other)" << std::endl;
+	if (this != &other) {
+		*this->ideas = *other.ideas;
+	}
+	return (*this);
+}
+
 Brain::~Brain() {
   std::cout << "Brain Destructor" << std::endl;
+}
+
+void Brain::setIdea(const std::string &idea, const int &index) {
+	if (index >= 0 && index < 100)
+		this->ideas[index] = idea;
+}
+
+std::string Brain::getIdea(const int &index) {
+	if (index >= 0 && index < 100)
+		return (this->ideas[index]);
+	else
+		return ("Out of the bound exception");
 }

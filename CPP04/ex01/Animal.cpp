@@ -3,6 +3,7 @@
 //
 
 #include "Animal.h"
+#include "Cat.h"
 
 Animal::Animal() : type("Animal") { //, brain(new Brain()
 	std::cout << "Animal::Animal()" << std::endl;
@@ -34,4 +35,11 @@ void Animal::makeSound() const {
 
 std::string Animal::getType() const {
   return this->type;
+}
+
+Brain &Animal::getBrain(void)
+{
+	if (this->type == "Cat" || this->type == "Dog") {
+    	return (this->getBrain());
+	}
 }
