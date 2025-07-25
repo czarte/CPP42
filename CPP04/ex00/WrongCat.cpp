@@ -34,7 +34,4 @@ void WrongCat::setType(std::string type) {
 	this->type = type;
 }
 
-void WrongCat::makeSound() const {
-	std::cout << "WrongCat::makeSound()" << std::endl;
-}
 
