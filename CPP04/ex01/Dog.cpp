@@ -14,41 +14,25 @@ Dog::Dog(std::string type) : Animal(type) {
 	this->brain = new Brain();
 }
 
-Dog::Dog(const Dog &other) : Animal(other) {
-	std::cout << "here Dog::Dog(const Dog &other)" << std::endl;
-	if (this != &other) {
-		*this->brain = *other.brain;
-	}
-}
+//Dog::Dog(const Dog &other) : Animal(other) {
+//	std::cout << "here Dog::Dog(const Dog &other)" << std::endl;
+//	this->brain = new Brain(*other.brain);
+//}
 
 Dog::Dog(Dog &other) : Animal(other) {
 	std::cout << "Dog::Dog(Dog &other)" << std::endl;
-	if (this != &other) {
-		*this->brain = *other.brain;
-	}
+    this->brain = new Brain(*other.brain);
 }
 
-Dog::Dog(const Animal &other) : Animal(other) {
-	std::cout << "Dog::Dog(const Dog &other)" << std::endl;
-	this->brain = new Brain();
-}
+//Dog::Dog(const Animal &other) : Animal(other) {
+//	std::cout << "Dog::Dog(const Dog &other)" << std::endl;
+//	this->brain = new Brain();
+//}
 
-Dog &Dog::operator=(const Dog &other) {
+Dog &Dog::operator=(Dog &other) {
 	std::cout << "Dog::Dog &operator=(const Dog &other)" << std::endl;
 	//Animal::operator=(other);
-	if (this != &other) {
-		*this->brain = *other.brain;
-	}
-	return (*this);
-}
-
-Dog &Dog::operator=(const Animal &other) {
-	std::cout << "Dog::Dog &operator=(const Animal &other)" << std::endl;
-	if (this != &other) {
-		this->type = other.getType();
-	}
-//	delete this->brain;
-//	this->brain = new Brain();
+	this->brain = new Brain(*other.brain);
 	return (*this);
 }
 

@@ -11,6 +11,21 @@ Brain::Brain() {
   std::cout << "Brain Constructor" << std::endl;
 }
 
+Brain::Brain(Brain &other) {
+	std::cout << "Brain::Brain(Brain &other)" << std::endl;
+	if (this != &other) {
+		*this->ideas = *other.ideas;
+	}
+}
+
+Brain &Brain::operator=(Brain &other) {
+	std::cout << "Brain::Brain &operator=(Brain &other)" << std::endl;
+	if (this != &other) {
+		*this->ideas = *other.ideas;
+	}
+	return (*this);
+}
+
 Brain::~Brain() {
   std::cout << "Brain Destructor" << std::endl;
 }

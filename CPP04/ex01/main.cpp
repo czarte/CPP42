@@ -38,19 +38,25 @@ int main()
 	std::cout << "-------------------------------------\n";
 	{
 		std::cout << "Check deep copy of Dog class using copy constructor:\n" << std::endl;
-		Dog *dogA = new Dog;
+		std::cout << "---------------DogA---------------\n";
+        Dog *dogA = new Dog;
 		dogA->getBrain().setIdea("I want sarshisitas!", 0);
 		dogA->getBrain().setIdea("Let's play ball!!", 1);
 		dogA->tell(0);
 		dogA->tell(1);
+        std::cout << "---------------DogB---------------\n";
 		Dog *dogB = new Dog();
+        std::cout << "---------------DogC---------------\n";
 		Dog *dogC = new Dog(*dogA);
-
         dogC->tell(0);
+        std::cout << "---------------DogB---------------\n";
 		dogB->getBrain().setIdea("Feed me human!", 0);
 		dogB->getBrain().setIdea("Feed me human!", 1);
+        std::cout << "---------------DogA---------------\n";
 		dogA->tell(0);
 		dogA->tell(1);
+        std::cout << "---------------Delete DogA+B------\n";
+        delete dogC;
 		delete dogA;
 		delete dogB;
 	}
@@ -65,7 +71,6 @@ int main()
 		dogA->tell(1);
         dogB->getBrain().setIdea("Feed me human!", 0);
         dogB->getBrain().setIdea("Feed me human!", 1);
-		*dogA = *dogB;
 
         dogA->tell(0);
 		dogA->tell(1);

@@ -2,7 +2,7 @@ SRC = Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
 CC = g++
 RM = rm -f
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic #-g -fsanitize=address
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -g -fsanitize=address
 
 NAME = animal
 
