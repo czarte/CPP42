@@ -37,9 +37,9 @@ std::string Animal::getType() const {
   return this->type;
 }
 
-Brain &Animal::getBrain(void)
-{
-	if (this->type == "Cat" || this->type == "Dog") {
-    	return (this->getBrain());
-	}
-}
+//Brain &Animal::getBrain(void)
+//{
+//	if (this->type == "Cat" || this->type == "Dog") {
+//    	return (this->getBrain());
+//	}
+//}

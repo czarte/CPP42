@@ -16,21 +16,31 @@ int main()
 
 		for (int i = 0; i < N_ANIMALS; i++)
 		{
-			if (i % 2)
+			if (i % 2) {
 				lotsOfAnimals[i] = new Dog();
-			else
+				Brain *brain;
+				brain = &lotsOfAnimals[i]->getBrain();
+				brain->setIdea("I want sarshisitas!", 0);
+				brain->setIdea("Let's play ball!!", 1);
+				brain->setIdea("Feed me human!", 2);
+			} else {
 				lotsOfAnimals[i] = new Cat();
+				Brain *brain;
+				brain = &lotsOfAnimals[i]->getBrain();
+				brain->setIdea("Miauuuuu", 0);
+				brain->setIdea("Miauuuuu Miauuuuu!!", 1);
+				brain->setIdea("Miauuuuu Miauuuuu Miauuuuu!", 2);
+            }
 		}
 		std::cout << "-------------------------------------\n";
-		std::cout << lotsOfAnimals[0]->getType() << std::endl;
-		std::cout << lotsOfAnimals[5]->getType() << std::endl;
-		Brain *brain;
-		brain = &lotsOfAnimals[0]->getBrain();
-		brain->setIdea("I want sarshisitas!", 0);
-		brain->setIdea("Let's play ball!!", 1);
-		brain->setIdea("Feed me human!", 2);
-		std::cout << lotsOfAnimals[0]->getBrain().getIdea(0) << std::endl;
-		std::cout << lotsOfAnimals[0]->getBrain().getIdea(1) << std::endl;
+		for (int i = 0; i < N_ANIMALS; i++)
+		{
+			std::cout << lotsOfAnimals[i]->getType() << std::endl;
+			std::cout << lotsOfAnimals[i]->getBrain().getIdea(0) << std::endl;
+			std::cout << lotsOfAnimals[i]->getBrain().getIdea(1) << std::endl;
+			std::cout << lotsOfAnimals[i]->getBrain().getIdea(2) << std::endl;
+			std::cout << "-------------------------------------\n";
+		}
 		std::cout << "-------------------------------------\n";
 		for (int i = 0; i < N_ANIMALS; i++)
 			delete lotsOfAnimals[i];
@@ -52,6 +62,8 @@ int main()
         std::cout << "---------------DogB---------------\n";
 		dogB->getBrain().setIdea("Feed me human!", 0);
 		dogB->getBrain().setIdea("Feed me human!", 1);
+        dogB->tell(0);
+		dogB->tell(1);
         std::cout << "---------------DogA---------------\n";
 		dogA->tell(0);
 		dogA->tell(1);
