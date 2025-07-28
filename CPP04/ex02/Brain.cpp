@@ -14,14 +14,18 @@ Brain::Brain() {
 Brain::Brain(Brain &other) {
 	std::cout << "Brain::Brain(Brain &other)" << std::endl;
 	if (this != &other) {
-		*this->ideas = *other.ideas;
+		for (int i = 0; i < 100; i++) {
+			this->ideas[i] = other.ideas[i];
+		}
 	}
 }
 
 Brain &Brain::operator=(Brain &other) {
 	std::cout << "Brain::Brain &operator=(Brain &other)" << std::endl;
 	if (this != &other) {
-		*this->ideas = *other.ideas;
+		for (int i = 0; i < 100; i++) {
+			this->ideas[i] = other.ideas[i];
+		}
 	}
 	return (*this);
 }

@@ -69,6 +69,7 @@ int main()
         std::cout << "---------------DogC---------------\n";
 		Dog *dogC = new Dog(*dogA);
         dogC->tell(0);
+  		dogC->tell(1);
         std::cout << "---------------DogB---------------\n";
 		dogB->getBrain().setIdea("Feed me human!", 0);
 		dogB->getBrain().setIdea("Feed me human!", 1);
@@ -77,7 +78,6 @@ int main()
         std::cout << "---------------DogA---------------\n";
 		dogA->tell(0);
 		dogA->tell(1);
-        dogA->tell(2);
         std::cout << "---------------Delete DogA+B------\n";
         delete dogC;
 		delete dogA;
@@ -86,18 +86,17 @@ int main()
 	std::cout << "-------------------------------------\n";
 	{
 		std::cout << "Check deep copy of Dog class using assignment operator overload:\n" << std::endl;
+  		std::cout << "---------------DogA---------------\n";
 		Dog *dogA = new Dog;
-		Dog *dogB = new Dog;
-		dogA->getBrain().setIdea("I want sarshisitas!", 0);
-        dogA->getBrain().setIdea("Let's play ball!!", 1);
-		dogA->tell(0);
-		dogA->tell(1);
-        dogB->getBrain().setIdea("Feed me human!", 0);
-        dogB->getBrain().setIdea("Feed me human!", 1);
-
-        dogA->tell(0);
-		dogA->tell(1);
-
+  		dogA->getBrain().setIdea("I want sarshisitas!", 0);
+  		dogA->getBrain().setIdea("Let's play ball!!", 1);
+  		dogA->tell(0);
+  		dogA->tell(1);
+  		std::cout << "---------------DogB---------------\n";
+		Dog *dogB = new Dog(*dogA);
+        dogB->tell(0);
+		dogB->tell(1);
+  		std::cout << "---------------Del----------------\n";
 		delete dogA;
 		delete dogB;
 	}

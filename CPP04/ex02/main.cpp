@@ -91,25 +91,6 @@ int main()
 		delete dogA;
 		delete dogB;
 	}
-//	std::cout << "-------------------------------------\n";
-//	{
-//		std::cout << "Check deep copy of Cat class using copy constructor:\n" << std::endl;
-//		Cat *catA = new Cat;
-//		Cat *catB = new Cat(*catA);
-//		std::cout << "-------------------------------------\n";
-//		delete catA;
-//		delete catB;
-//	}
 
-
-//	{
-//		std::cout << "Check deep copy of Cat class using assignment operator overload:\n" << std::endl;
-//		Cat *catA = new Cat;
-//		Cat *catB = new Cat;
-//
-//		*catA = *catB;
-//		delete catA;
-//		delete catB;
-//	}
 	return (0);
 }
