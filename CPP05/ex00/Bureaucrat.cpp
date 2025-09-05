@@ -4,13 +4,14 @@
 
 #include "Bureaucrat.h"
 
-Bureaucrat::Bureaucrat() {
-	this->grade = 1;
-}
+Bureaucrat::Bureaucrat() : name("Bureaucrat"), grade(150) {}
 
-Bureaucrat::Bureaucrat(const std::string name) : name(name) {
-	this->grade = 1;
-
+Bureaucrat::Bureaucrat(const std::string name, int grade) : name(name) {
+	try {
+		setGrade(grade) ;
+	} catch (std::exception & e) {
+		std::cerr << e.what();
+	}
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat & other) : name(other.name), grade(other.grade) {}
@@ -30,31 +31,51 @@ std::ostream& operator<<(std::ostream &os, Bureaucrat & bureaucrat) {
 }
 
 void Bureaucrat::gradeUp() {
+//	if (--this->grade < 1) {
+//		this->grade = 1;
+//		throw GradeTooHighExeption();
+//	}
 	try {
 		if (--this->grade < 1) {
 			this->grade = 1;
-			throw GradeTooHighException;
+			throw GradeTooHighExeption();
 		}
 	}
-	catch (...) {
-		std::cout << "Exeption: Grade is too low" << std::endl;
+	catch (std::exception & e) {
+		std::cout << e.what();
 	}
 }
 
 void Bureaucrat::gradeDown() {
+//	if (++this->grade > 150) {
+//		this->grade = 150;
+//		throw GradeTooLowExeption();
+//	}
 	try {
 		if (++this->grade > 150) {
 			this->grade = 150;
-			throw GradeTooLowException;
+			throw GradeTooLowExeption();
 		}
 	}
-	catch (...) {
-		std::cout << "Exeption: Grade is too low" << std::endl;
+	catch (std::exception & e) {
+		std::cerr << e.what();
 	}
 }
 
 int Bureaucrat::getGrade() {
 	return this->grade;
+}
+
+void Bureaucrat::setGrade(int grade) {
+	if (grade > 150) {
+		this->grade = 150;
+		throw GradeTooLowExeption();
+	}
+	if (grade < 1) {
+		this->grade = 1;
+		throw GradeTooHighExeption();
+	}
+	this->grade = grade;
 }
 
 const std::string Bureaucrat::getName() {

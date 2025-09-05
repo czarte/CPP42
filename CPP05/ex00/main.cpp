@@ -2,12 +2,24 @@
 
 int main() {
 	std::cout << "hello bureaucrat world" << std::endl;
-	Bureaucrat b = Bureaucrat("Paul");
+	Bureaucrat b = Bureaucrat("Paul", 1);
+	Bureaucrat c = Bureaucrat("Stephane", 151);
+//	try {
+//		c = Bureaucrat("Stephane", 151);
+//	} catch (std::exception & e) {
+//		std::cerr << e.what();
+//	}
+	std::cout << c;
 	b.gradeDown();
 	std::cout << b;
 	b.gradeUp();
-	b.gradeUp();
-	b.gradeUp();
+	std::cout << b;
+	try { b.gradeUp(); } catch (std::exception & e) {
+		std::cerr << e.what();
+	}
+	try { b.gradeUp(); } catch (std::exception & e) {
+		std::cerr << e.what();
+	}
 	std::cout << b;
 	return 0;
 }

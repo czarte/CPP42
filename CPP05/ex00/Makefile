@@ -1,4 +1,4 @@
-SRC = Bureaucrat.cpp main.cpp
+SRC = Bureaucrat.cpp main.cpp custom_types.cpp
 OBJ = $(SRC:.cpp=.o)
 CC = g++
 RM = rm -f
