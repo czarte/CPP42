@@ -8,7 +8,7 @@ Bureaucrat::Bureaucrat() : name("Bureaucrat"), grade(150) {}
 
 Bureaucrat::Bureaucrat(const std::string name, int grade) : name(name) {
 	try {
-		setGrade(grade);
+		setGrade(grade) ;
 	} catch (std::exception & e) {
 		std::cerr << e.what();
 	}
