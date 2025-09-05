@@ -4,10 +4,7 @@
 
 #include "Form.h"
 
-Form::Form() : name("Default"), sign_grade(1), exec_grade(150) {
-	this->counter++;
-
-}
+Form::Form() : name("Default"), sign_grade(1), exec_grade(150) {}
 
 Form::Form(const std::string name, const int sign_grade, const int exec_grade)
 	: name(name), sign_grade(sign_grade), exec_grade(exec_grade)
@@ -39,9 +36,13 @@ const std::string Form::getName() {
 	return this->name;
 }
 
+//int Form::getOrder() {
+//	return this->order;
+//}
+
 std::ostream& operator<<(std::ostream &os, Form & form) {
 	os
-		<< "------------Form---------------" << std::endl
+		<< "------------Form---------------" << std::endl //" << form.getOrder() << "
 		<< "The form "
 		<< form.getName()
 		<< ", grade required to sign "

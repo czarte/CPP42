@@ -13,8 +13,8 @@ class Form {
 		bool is_signed;
 		const int sign_grade;
 		const int exec_grade;
-		const int order;
-		static int counter;
+//		const int order;
+//		static int counter;
 	public:
 		Form();
 		Form(const std::string name, int sign_grade, int exec_grade);
@@ -24,6 +24,7 @@ class Form {
 		const std::string getName();
 		int getSignGrade();
 		int getExecGrade();
+//		int getOrder();
 		void setSignGrade(const int grade);
 		void setExecGrade(const int grade);
 
@@ -38,6 +39,8 @@ class Form {
 	};
 
 };
+
+//int Form::counter = 0;
 
 std::ostream & operator<<(std::ostream &os, Form & form);
 

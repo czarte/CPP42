@@ -9,7 +9,7 @@ NAME = bureaucrat
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
+		$(CC) -v $(CPPFLAGS) $(OBJ) -v -o $(NAME)
 
 #%.o: %.cpp
 #		$(CC) -c -o $< $(CPPFLAGS)
