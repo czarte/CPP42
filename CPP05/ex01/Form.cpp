@@ -3,6 +3,8 @@
 //
 
 #include "Form.h"
+#include "Bureaucrat.h"
+
 
 Form::Form() : name("Default"), sign_grade(1), exec_grade(150) {}
 
@@ -16,11 +18,8 @@ Form::Form(const std::string name, const int sign_grade, const int exec_grade)
 }
 
 Form::Form(const Form & other)
-	: sign_grade(other.sign_grade), exec_grade(other.exec_grade)
+	: name(other.name), sign_grade(other.sign_grade), exec_grade(other.exec_grade)
 {
-	if (this != &other) {
-		this->name = other.name;
-	}
 }
 
 Form::~Form() {}
@@ -36,13 +35,24 @@ const std::string Form::getName() {
 	return this->name;
 }
 
-//int Form::getOrder() {
-//	return this->order;
-//}
+bool Form::isSigned() {
+	return this->is_signed;
+}
+
+void Form::beSigned(Bureaucrat & bureaucrat) {
+	if (bureaucrat.getGrade() <= this->getSignGrade()) {
+		this->is_signed = true;
+	}
+	if (bureaucrat.getGrade() > this->getSignGrade()) {
+		throw GradeTooLowExeption();
+	}
+
+
+}
 
 std::ostream& operator<<(std::ostream &os, Form & form) {
 	os
-		<< "------------Form---------------" << std::endl //" << form.getOrder() << "
+		<< "------------Form---------------" << std::endl
 		<< "The form "
 		<< form.getName()
 		<< ", grade required to sign "
@@ -55,9 +65,9 @@ std::ostream& operator<<(std::ostream &os, Form & form) {
 }
 
 const char * Form::GradeTooLowExeption::what() const throw() {
-	return "Grade too low\n";
+	return "Grade of Burreaucrat is too low to sign the Form\n";
 }
 
 const char * Form::GradeTooHighExeption::what() const throw() {
-	return "Grade too high\n";
+	return "Grade of Form too high\n";
 }

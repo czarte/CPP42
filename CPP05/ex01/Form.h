@@ -7,14 +7,14 @@
 
 #include <iostream>
 
+class Bureaucrat;
+
 class Form {
 	private:
-		std::string name;
-		bool is_signed;
+		const std::string name;
 		const int sign_grade;
 		const int exec_grade;
-//		const int order;
-//		static int counter;
+		bool is_signed;
 	public:
 		Form();
 		Form(const std::string name, int sign_grade, int exec_grade);
@@ -24,9 +24,8 @@ class Form {
 		const std::string getName();
 		int getSignGrade();
 		int getExecGrade();
-//		int getOrder();
-		void setSignGrade(const int grade);
-		void setExecGrade(const int grade);
+		void beSigned(Bureaucrat & bureaucrat);
+		bool isSigned();
 
 	class GradeTooLowExeption : virtual public std::exception {
 		public:
@@ -39,8 +38,6 @@ class Form {
 	};
 
 };
-
-//int Form::counter = 0;
 
 std::ostream & operator<<(std::ostream &os, Form & form);
 

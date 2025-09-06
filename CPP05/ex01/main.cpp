@@ -3,7 +3,7 @@
 
 int main() {
 	std::cout << "hello bureaucrat world" << std::endl;
-	Bureaucrat b = Bureaucrat("Paul", 1);
+	Bureaucrat b = Bureaucrat("Paul", 51);
 	Form c;
 	std::cout << c;
 	try {
@@ -12,7 +12,9 @@ int main() {
 		std::cerr << e.what();
 		std::cout << c;
 	}
-
+	Form d = Form("B51", 50, 150);
+	std::cout << d;
+	b.signForm(d);
 	b.gradeDown();
 	std::cout << b;
 	b.gradeUp();
@@ -24,5 +26,6 @@ int main() {
 		std::cerr << e.what();
 	}
 	std::cout << b;
+	try { b.signForm(d); } catch (std::exception & e) { std::cerr << e.what(); }
 	return 0;
 }

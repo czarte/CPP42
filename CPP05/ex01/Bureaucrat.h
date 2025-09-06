@@ -5,7 +5,8 @@
 #ifndef CPP42_BUREAUCRAT_H
 #define CPP42_BUREAUCRAT_H
 #include <iostream>
-#include "custom_types.h"
+
+class Form;
 
 class Bureaucrat {
 	private:
@@ -22,6 +23,7 @@ class Bureaucrat {
 		int getGrade();
 		void setGrade(int grade);
 		const std::string getName();
+		void signForm(Form &form);
 
 		class GradeTooHighExeption : virtual public std::exception {
 			public:

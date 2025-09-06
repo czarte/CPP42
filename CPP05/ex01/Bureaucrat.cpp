@@ -3,6 +3,7 @@
 //
 
 #include "Bureaucrat.h"
+#include "Form.h"
 
 Bureaucrat::Bureaucrat() : name("Bureaucrat"), grade(150) {}
 
@@ -80,6 +81,24 @@ void Bureaucrat::setGrade(int grade) {
 
 const std::string Bureaucrat::getName() {
 	return this->name;
+}
+
+void Bureaucrat::signForm(Form &form) {
+	try {
+		form.beSigned(*this);
+		std::cout
+				<< this->getName()
+				<< " signed "
+				<< form.getName()
+				<< std::endl;
+	} catch (std::exception & e) {
+		std::cout
+				<< this->getName()
+				<< " couldn’t sign "
+				<< form.getName()
+				<< " because "
+				<< e.what();
+	}
 }
 
 const char * Bureaucrat::GradeTooHighExeption::what() const throw() {
