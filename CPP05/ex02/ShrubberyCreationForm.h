@@ -6,6 +6,7 @@
 #define CPP42_SHRUBBERYCREATIONFORM_H
 
 #include "AForm.h"
+#include "Bureaucrat.h"
 
 class ShrubberyCreationForm : public AForm {
 	private:
@@ -19,8 +20,16 @@ class ShrubberyCreationForm : public AForm {
 		const std::string getName();
 		int getSignGrade();
 		int getExecGrade();
+		int const getExecGrade() const;
 		void beSigned(Bureaucrat & bureaucrat);
 		bool isSigned();
+		bool const isSigned() const;
+		void execute(Bureaucrat const & executor) const;
+
+	class GradeTooLowExeptionToCreate : virtual public std::exception {
+	public:
+		const char * what() const throw();
+	};
 };
 
 std::ostream & operator<<(std::ostream &os, ShrubberyCreationForm & form);

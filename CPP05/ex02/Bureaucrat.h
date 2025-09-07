@@ -21,6 +21,7 @@ class Bureaucrat {
 		void gradeUp();
 		void gradeDown();
 		int getGrade();
+		int const getGrade() const;
 		void setGrade(int grade);
 		const std::string getName();
 		void signForm(AForm &form);

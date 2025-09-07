@@ -3,6 +3,7 @@
 //
 
 #include "ShrubberyCreationForm.h"
+#include <fstream>
 
 ShrubberyCreationForm::ShrubberyCreationForm()
 	: AForm("ShrubberyCreationForm", 145, 137)
@@ -20,7 +21,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(
 	if (exec_grade < 1 || sign_grade < 1)
 		throw GradeTooHighExeption();
 	if (exec_grade > 137 || sign_grade > 145)
-		throw GradeTooLowExeption();
+		throw GradeTooLowExeptionToCreate();
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm & other)
@@ -48,11 +49,31 @@ int ShrubberyCreationForm::getExecGrade() {
 	return AForm::getExecGrade();
 }
 
+int const ShrubberyCreationForm::getExecGrade() const {
+	return AForm::getExecGrade();
+}
+
 void ShrubberyCreationForm::beSigned(Bureaucrat & bureaucrat) {
 	AForm::beSigned(bureaucrat);
 }
+
 bool ShrubberyCreationForm::isSigned() {
 	return AForm::isSigned();
+}
+
+bool const ShrubberyCreationForm::isSigned() const {
+	return AForm::isSigned();
+}
+
+void ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
+	Bureaucrat exec = static_cast<Bureaucrat>(executor);
+	if (exec.getGrade() > this->getExecGrade() && this->isSigned())  {
+		std::ofstream outFile(this->target);
+		if (!outFile) {  // check if file opened successfully
+			std::cerr << "Error opening file for writing!" << std::endl;
+			return;
+		}
+	}
 }
 
 std::ostream& operator<<(std::ostream &os, ShrubberyCreationForm & form) {
@@ -67,4 +88,8 @@ std::ostream& operator<<(std::ostream &os, ShrubberyCreationForm & form) {
 			<< std::endl
 			<< "-------------------------------" << std::endl;
 	return os;
+}
+
+const char * ShrubberyCreationForm::GradeTooLowExeptionToCreate::what() const throw() {
+	return "ShrubberyCreationForm exeption: Grades for this Form are out of bounds: minimum is execution grade > 137 and signing grade > 145\n";
 }

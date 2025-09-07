@@ -63,6 +63,10 @@ void Bureaucrat::gradeDown() {
 	}
 }
 
+int const Bureaucrat::getGrade() const {
+	return this->grade;
+}
+
 int Bureaucrat::getGrade() {
 	return this->grade;
 }

@@ -13,10 +13,20 @@ int main() {
 		std::cerr << e.what();
 		std::cout << c;
 	}
-	ShrubberyCreationForm d = ShrubberyCreationForm("B51", 50, 150, "shrubery");
-	std::cout << d;
-	AForm *da = dynamic_cast<AForm*>(&d);
-	b.signForm(*da);
+	Bureaucrat shrubbery_bad_signer = Bureaucrat("Shrubbery Bad Signer", 51);
+	try {
+		ShrubberyCreationForm d = ShrubberyCreationForm("B51", 50, 141, "shrubery");
+		std::cout << d;
+		AForm *da = dynamic_cast<AForm*>(&d);
+		try {
+			shrubbery_bad_signer.signForm(*da);
+		} catch (std::exception & e) {
+			std::cerr << e.what();
+		}
+		b.signForm(*da);
+	} catch (std::exception & e) {
+		std::cerr << e.what();
+	}
 	b.gradeDown();
 	std::cout << b;
 	b.gradeUp();
@@ -28,6 +38,6 @@ int main() {
 		std::cerr << e.what();
 	}
 	std::cout << b;
-	try { b.signForm(d); } catch (std::exception & e) { std::cerr << e.what(); }
+	//try { b.signForm(d); } catch (std::exception & e) { std::cerr << e.what(); }
 	return 0;
 }
