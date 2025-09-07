@@ -16,6 +16,7 @@ $(NAME): $(OBJ)
 
 clean:
 		$(RM) $(OBJ)
+		$(RM) shrubery
 
 fclean: clean
 		$(RM) $(NAME)

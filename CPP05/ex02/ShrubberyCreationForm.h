@@ -20,11 +20,12 @@ class ShrubberyCreationForm : public AForm {
 		const std::string getName();
 		int getSignGrade();
 		int getExecGrade();
-		int const getExecGrade() const;
+		int getExecGrade() const;
 		void beSigned(Bureaucrat & bureaucrat);
 		bool isSigned();
-		bool const isSigned() const;
+		bool isSigned() const;
 		void execute(Bureaucrat const & executor) const;
+		void debug_execution(Bureaucrat exec) const;
 
 	class GradeTooLowExeptionToCreate : virtual public std::exception {
 	public:

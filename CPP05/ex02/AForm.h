@@ -24,11 +24,12 @@ class AForm {
 		virtual const std::string getName() = 0;
 		virtual int getSignGrade() = 0;
 		virtual int getExecGrade() = 0;
-		virtual int const getExecGrade() const = 0;
+		virtual int getExecGrade() const = 0;
 		virtual void beSigned(Bureaucrat & bureaucrat) = 0;
 		virtual bool isSigned() = 0;
-		virtual bool const isSigned() const = 0;
+		virtual bool isSigned() const = 0;
 		virtual void execute(Bureaucrat const & executor) const = 0;
+		virtual void debug_execution(Bureaucrat exec) const = 0;
 
 	class GradeTooLowExeption : virtual public std::exception {
 		public:

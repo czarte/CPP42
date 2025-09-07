@@ -27,7 +27,12 @@ AForm::~AForm() {}
 int AForm::getSignGrade() {
 	return this->sign_grade;
 }
+
 int AForm::getExecGrade() {
+	return this->exec_grade;
+}
+
+int AForm::getExecGrade() const {
 	return this->exec_grade;
 }
 
@@ -36,6 +41,10 @@ const std::string AForm::getName() {
 }
 
 bool AForm::isSigned() {
+	return this->is_signed;
+}
+
+bool AForm::isSigned() const {
 	return this->is_signed;
 }
 

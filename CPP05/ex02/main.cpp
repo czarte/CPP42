@@ -11,11 +11,11 @@ int main() {
 		Bureaucrat c = Bureaucrat("Stephane", 151);
 	} catch (std::exception & e) {
 		std::cerr << e.what();
-		std::cout << c;
 	}
 	Bureaucrat shrubbery_bad_signer = Bureaucrat("Shrubbery Bad Signer", 51);
+	Bureaucrat shrubbery_good_signer = Bureaucrat("Shrubbery Good Signer", 50);
 	try {
-		ShrubberyCreationForm d = ShrubberyCreationForm("B51", 50, 141, "shrubery");
+		ShrubberyCreationForm d = ShrubberyCreationForm("B51", 50, 50, "shrubery");
 		std::cout << d;
 		AForm *da = dynamic_cast<AForm*>(&d);
 		try {
@@ -24,6 +24,12 @@ int main() {
 			std::cerr << e.what();
 		}
 		b.signForm(*da);
+		try {
+			shrubbery_good_signer.signForm(*da);
+			da->execute(shrubbery_good_signer);
+		} catch (std::exception & e) {
+			std::cerr << e.what();
+		}
 	} catch (std::exception & e) {
 		std::cerr << e.what();
 	}

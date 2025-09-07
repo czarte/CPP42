@@ -7,7 +7,7 @@
 
 ShrubberyCreationForm::ShrubberyCreationForm()
 	: AForm("ShrubberyCreationForm", 145, 137)
-		, target("default_target")
+	, target("default_target")
 {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(
@@ -49,7 +49,7 @@ int ShrubberyCreationForm::getExecGrade() {
 	return AForm::getExecGrade();
 }
 
-int const ShrubberyCreationForm::getExecGrade() const {
+int ShrubberyCreationForm::getExecGrade() const {
 	return AForm::getExecGrade();
 }
 
@@ -61,18 +61,33 @@ bool ShrubberyCreationForm::isSigned() {
 	return AForm::isSigned();
 }
 
-bool const ShrubberyCreationForm::isSigned() const {
+bool ShrubberyCreationForm::isSigned() const {
 	return AForm::isSigned();
 }
 
 void ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
 	Bureaucrat exec = static_cast<Bureaucrat>(executor);
-	if (exec.getGrade() > this->getExecGrade() && this->isSigned())  {
+	this->debug_execution(exec);
+	if ((exec.getGrade() <= this->getExecGrade()) && this->isSigned())  {
 		std::ofstream outFile(this->target);
-		if (!outFile) {  // check if file opened successfully
+		if (!outFile) {
 			std::cerr << "Error opening file for writing!" << std::endl;
 			return;
 		}
+		std::cout << "execute the shrubbery form, printing into file '" << this->target << "'" << std::endl;
+		outFile << "---------------------------------" << std::endl
+				<< "|				A				|" << std::endl
+				<< "|			   A A				|" << std::endl
+				<< "|			  A| |A				|" << std::endl
+				<< "|			 A |A| A			|" << std::endl
+				<< "|			  A| |A				|" << std::endl
+				<< "|			 A | | A			|" << std::endl
+				<< "|			A  | |  A			|" << std::endl
+				<< "|			   | |				|" << std::endl
+				<< "|			   | |				|" << std::endl
+				<< "|			   | |				|" << std::endl
+				<< "---------------------------------" << std::endl;
+		outFile.close();
 	}
 }
 
@@ -92,4 +107,12 @@ std::ostream& operator<<(std::ostream &os, ShrubberyCreationForm & form) {
 
 const char * ShrubberyCreationForm::GradeTooLowExeptionToCreate::what() const throw() {
 	return "ShrubberyCreationForm exeption: Grades for this Form are out of bounds: minimum is execution grade > 137 and signing grade > 145\n";
+}
+
+void ShrubberyCreationForm::debug_execution(Bureaucrat exec) const {
+	std::cout
+			<< "-----------------debug execution of form------------------" << std::endl
+			<< "is signed: " << this->isSigned() << ", exec grade: " << this->getExecGrade() << std::endl
+			<< exec
+			<< "---------------end of debug form execution----------------" << std::endl;
 }
