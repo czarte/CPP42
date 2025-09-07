@@ -36,7 +36,7 @@ int AForm::getExecGrade() const {
 	return this->exec_grade;
 }
 
-const std::string AForm::getName() {
+const std::string AForm::getName() const {
 	return this->name;
 }
 

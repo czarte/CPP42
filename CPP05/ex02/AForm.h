@@ -4,6 +4,7 @@
 
 #ifndef CPP42_FORM_H
 #define CPP42_FORM_H
+#define DEBUG false
 
 #include <iostream>
 
@@ -21,7 +22,7 @@ class AForm {
 		AForm(const AForm & other);
 		~AForm();
 		const AForm & operator=(const AForm & other);
-		virtual const std::string getName() = 0;
+		virtual const std::string getName() const = 0;
 		virtual int getSignGrade() = 0;
 		virtual int getExecGrade() = 0;
 		virtual int getExecGrade() const = 0;

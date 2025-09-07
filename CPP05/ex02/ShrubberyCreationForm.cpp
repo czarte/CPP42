@@ -11,18 +11,10 @@ ShrubberyCreationForm::ShrubberyCreationForm()
 {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(
-		const std::string name,
-		const int sign_grade,
-		const int exec_grade,
 		std::string target
 )
-	: AForm(name, sign_grade, exec_grade), target(target)
-{
-	if (exec_grade < 1 || sign_grade < 1)
-		throw GradeTooHighExeption();
-	if (exec_grade > 137 || sign_grade > 145)
-		throw GradeTooLowExeptionToCreate();
-}
+	: AForm("ShrubberyCreationForm", 145, 137), target(target)
+{}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm & other)
 		: AForm(other), target(other.target)
@@ -37,7 +29,7 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	return (*this);
 }
 
-const std::string ShrubberyCreationForm::getName() {
+const std::string ShrubberyCreationForm::getName() const {
 	return AForm::getName();
 }
 
@@ -69,6 +61,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
 	Bureaucrat exec = static_cast<Bureaucrat>(executor);
 	this->debug_execution(exec);
 	if ((exec.getGrade() <= this->getExecGrade()) && this->isSigned())  {
+		std::cout << exec.getName() << " executed " << this->getName() << std::endl;
 		std::ofstream outFile(this->target);
 		if (!outFile) {
 			std::cerr << "Error opening file for writing!" << std::endl;
@@ -110,9 +103,14 @@ const char * ShrubberyCreationForm::GradeTooLowExeptionToCreate::what() const th
 }
 
 void ShrubberyCreationForm::debug_execution(Bureaucrat exec) const {
-	std::cout
+	if (DEBUG)
+		std::cout
 			<< "-----------------debug execution of form------------------" << std::endl
-			<< "is signed: " << this->isSigned() << ", exec grade: " << this->getExecGrade() << std::endl
+			<< "is signed: "
+			<< this->isSigned()
+			<< ", exec grade: "
+			<< this->getExecGrade()
+			<< std::endl
 			<< exec
 			<< "---------------end of debug form execution----------------" << std::endl;
 }

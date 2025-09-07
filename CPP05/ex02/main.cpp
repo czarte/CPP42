@@ -1,11 +1,18 @@
 #include "Bureaucrat.h"
 #include "ShrubberyCreationForm.h"
+#include "RobotomyRequestForm.h"
+#include "PresidentialPardonForm.h"
 #include "AForm.h"
 
 int main() {
 	std::cout << "hello bureaucrat world" << std::endl;
 	Bureaucrat b = Bureaucrat("Paul", 51);
 	ShrubberyCreationForm c;
+	RobotomyRequestForm robo = RobotomyRequestForm("Beebox");
+	PresidentialPardonForm pp = PresidentialPardonForm("Lolipop");
+	Bureaucrat minister = Bureaucrat("Ministry of justice", 5);
+	minister.signForm(pp);
+	pp.execute(minister);
 	std::cout << c;
 	try {
 		Bureaucrat c = Bureaucrat("Stephane", 151);
@@ -13,9 +20,15 @@ int main() {
 		std::cerr << e.what();
 	}
 	Bureaucrat shrubbery_bad_signer = Bureaucrat("Shrubbery Bad Signer", 51);
-	Bureaucrat shrubbery_good_signer = Bureaucrat("Shrubbery Good Signer", 50);
+	Bureaucrat shrubbery_good_signer = Bureaucrat("Shrubbery Good Signer", 40);
 	try {
-		ShrubberyCreationForm d = ShrubberyCreationForm("B51", 50, 50, "shrubery");
+		shrubbery_good_signer.signForm(robo);
+		robo.execute(shrubbery_good_signer);
+	} catch (std::exception & e) {
+		std::cerr << e.what();
+	}
+	try {
+		ShrubberyCreationForm d = ShrubberyCreationForm("shrubery");
 		std::cout << d;
 		AForm *da = dynamic_cast<AForm*>(&d);
 		try {
