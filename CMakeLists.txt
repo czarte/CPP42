@@ -1,47 +1,38 @@
 cmake_minimum_required(VERSION 3.30)
-project(CPP01)
+project(CPP04)
 
 set(CMAKE_CXX_STANDARD 98)
 
-add_executable(CPP01 ex00/main.cpp
-        ex00/Zombie.cpp
-        ex00/Zombie.h
-        ex00/main.cpp
-        ex00/zombieHorde.cpp
-        ex02/main.cpp
-        ex04/main.cpp
-        ex03/main.cpp
-        ex03/Weapon.cpp
-        ex03/Weapon.h
-        ex03/HumanA.cpp
-        ex03/HumanA.h
-        ex03/HumanB.cpp
-        ex03/HumanB.h
-        CPP01/ex05/Harl.cpp
-        CPP01/ex05/Harl.h
-        CPP02/ex00/Fixed.cpp
-        CPP02/ex00/Fixed.h
-        CPP03/ex00/ClapTrap.cpp
-        CPP03/ex00/ClapTrap.h
-        CPP03/ex00/main.cpp
-        CPP03/ex01/ScavTrap.cpp
-        CPP03/ex01/ScavTrap.h
-        CPP03/ex01/ScavTrap.h
-        CPP03/ex01/ScavTrap.cpp
-        CPP03/ex01/ScavTrap.h
-        CPP03/ex02/FragTrap.cpp
-        CPP03/ex02/FragTrap.h CPP01/ex04/Read.cpp CPP01/ex04/Read.h CPP01/ex04/Write.cpp CPP01/ex04/Write.h
-        CPP01/ex04/main.cpp
-        CPP04/ex00/main.cpp
-        CPP04/ex00/Animal.cpp
-        CPP04/ex00/Animal.h
-        CPP04/ex00/Dog.cpp
-        CPP04/ex00/Dog.h
-        CPP04/ex00/Cat.cpp
-        CPP04/ex00/Cat.h
-        CPP04/ex00/WrongAnimal.cpp
-        CPP04/ex00/WrongAnimal.h
-        CPP04/ex00/WrongCat.cpp
-        CPP04/ex00/WrongCat.h
+add_executable(
+        CPP04/ex01/main.cpp
+        CPP04/ex01/Animal.cpp
+        CPP04/ex01/Animal.h
+        CPP04/ex01/Dog.cpp
+        CPP04/ex01/Dog.h
+        CPP04/ex01/Cat.cpp
+        CPP04/ex01/Cat.h
+        CPP04/ex01/WrongAnimal.cpp
+        CPP04/ex01/WrongAnimal.h
+        CPP04/ex01/WrongCat.cpp
+        CPP04/ex01/WrongCat.h
         CPP04/ex01/Brain.cpp
-        CPP04/ex01/Brain.h)
+        CPP04/ex01/Brain.h
+        CPP04/ex01/Animal.cpp
+        CPP05/ex00/Bureaucrat.cpp
+        CPP05/ex00/Bureaucrat.h
+        CPP05/ex00/custom_types.h
+        CPP05/ex00/main.cpp
+        CPP05/ex00/Bureaucrat.cpp
+        CPP05/ex00/custom_types.h
+        CPP05/ex01/Form.cpp
+        CPP05/ex01/Form.h
+        CPP05/ex02/ShrubberyCreationForm.cpp
+        CPP05/ex02/ShrubberyCreationForm.h
+        CPP05/ex02/RobotomyRequestForm.cpp
+        CPP05/ex02/RobotomyRequestForm.h
+        CPP05/ex02/PresidentialPardonForm.cpp
+        CPP05/ex02/PresidentialPardonForm.h
+        CPP05/ex03/Intern.cpp
+        CPP05/ex03/Intern.h
+        CPP06/ex00/ScalarConverter.cpp
+        CPP06/ex00/ScalarConverter.h)

@@ -5,9 +5,17 @@
 #ifndef CPP42_SCALARCONVERTER_H
 #define CPP42_SCALARCONVERTER_H
 
+#include <iostream>
+#include <string>
 
 class ScalarConverter {
-
+    private:
+    public:
+        ScalarConverter();
+        ScalarConverter(const ScalarConverter& other);
+        ScalarConverter& operator=(const ScalarConverter& other);
+        ~ScalarConverter();
+        static void convert(const std::string& literal);
 };
 
 
