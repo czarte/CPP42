@@ -20,6 +20,7 @@ class RobotomyRequestForm : public AForm {
 		RobotomyRequestForm &operator=(const RobotomyRequestForm & other);
 		const std::string getName() const;
 		int getSignGrade();
+		int getSignGrade() const;
 		int getExecGrade();
 		int getExecGrade() const;
 		void beSigned(Bureaucrat & bureaucrat);

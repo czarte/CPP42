@@ -28,6 +28,10 @@ int AForm::getSignGrade() {
 	return this->sign_grade;
 }
 
+int AForm::getSignGrade() const {
+	return this->sign_grade;
+}
+
 int AForm::getExecGrade() {
 	return this->exec_grade;
 }

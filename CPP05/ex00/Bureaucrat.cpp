@@ -35,6 +35,7 @@ void Bureaucrat::gradeUp() {
 //		this->grade = 1;
 //		throw GradeTooHighExeption();
 //	}
+	std::cout << "incrementing Grade" << std::endl;
 	try {
 		if (--this->grade < 1) {
 			this->grade = 1;
@@ -51,6 +52,7 @@ void Bureaucrat::gradeDown() {
 //		this->grade = 150;
 //		throw GradeTooLowExeption();
 //	}
+	std::cout << "decrementing Grade" << std::endl;
 	try {
 		if (++this->grade > 150) {
 			this->grade = 150;
@@ -59,6 +61,7 @@ void Bureaucrat::gradeDown() {
 	}
 	catch (std::exception & e) {
 		std::cerr << e.what();
+		throw ;
 	}
 }
 

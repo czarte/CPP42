@@ -36,6 +36,10 @@ int RobotomyRequestForm::getSignGrade() {
 	return AForm::getSignGrade();
 }
 
+int RobotomyRequestForm::getSignGrade() const {
+	return AForm::getSignGrade();
+}
+
 int RobotomyRequestForm::getExecGrade() {
 	return AForm::getExecGrade();
 }

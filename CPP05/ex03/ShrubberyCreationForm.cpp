@@ -37,6 +37,10 @@ int ShrubberyCreationForm::getSignGrade() {
 	return AForm::getSignGrade();
 }
 
+int ShrubberyCreationForm::getSignGrade() const {
+	return AForm::getSignGrade();
+}
+
 int ShrubberyCreationForm::getExecGrade() {
 	return AForm::getExecGrade();
 }
@@ -81,6 +85,11 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
 				<< "|			   | |				|" << std::endl
 				<< "---------------------------------" << std::endl;
 		outFile.close();
+	} else {
+		if (exec.getGrade() > this->getExecGrade())
+			throw GradeTooLowExecuteExeptionToCreate();
+		if (!this->isSigned())
+			throw FormNotSignedException();
 	}
 }
 
@@ -102,12 +111,22 @@ const char * ShrubberyCreationForm::GradeTooLowExeptionToCreate::what() const th
 	return "ShrubberyCreationForm exeption: Grades for this Form are out of bounds: minimum is execution grade > 137 and signing grade > 145\n";
 }
 
+const char * ShrubberyCreationForm::GradeTooLowExecuteExeptionToCreate::what() const throw() {
+	return "ShrubberyCreationForm exeption: Grade of Burreaucrat is too low to execute this form\n";
+}
+
+const char * ShrubberyCreationForm::FormNotSignedException::what() const throw() {
+	return "ShrubberyCreationForm exeption: Form is not signed\n";
+}
+
 void ShrubberyCreationForm::debug_execution(Bureaucrat exec) const {
 	if (DEBUG)
 		std::cout
 			<< "-----------------debug execution of form------------------" << std::endl
 			<< "is signed: "
 			<< this->isSigned()
+			<< ", sign grade: "
+			<< this->getSignGrade()
 			<< ", exec grade: "
 			<< this->getExecGrade()
 			<< std::endl

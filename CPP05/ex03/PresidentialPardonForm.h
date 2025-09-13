@@ -20,6 +20,7 @@ public:
 	PresidentialPardonForm &operator=(const PresidentialPardonForm & other);
 	const std::string getName() const;
 	int getSignGrade();
+	int getSignGrade() const;
 	int getExecGrade();
 	int getExecGrade() const;
 	void beSigned(Bureaucrat & bureaucrat);

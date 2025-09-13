@@ -9,11 +9,17 @@ int main() {
 //	} catch (std::exception & e) {
 //		std::cerr << e.what();
 //	}
+	std::cout << "-----------------" << std::endl;
 	std::cout << c;
+	std::cout << "-----------------" << std::endl;
+	std::cout << b;
+	try { b.gradeUp(); } catch (std::exception & e) { std::cerr << "EXEPTION:" << e.what(); throw ; }
 	b.gradeDown();
 	std::cout << b;
+	std::cout << "-----------------" << std::endl;
 	b.gradeUp();
 	std::cout << b;
+	std::cout << "-----------------" << std::endl;
 	try { b.gradeUp(); } catch (std::exception & e) {
 		std::cerr << e.what();
 	}

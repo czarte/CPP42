@@ -10,7 +10,8 @@ PresidentialPardonForm::PresidentialPardonForm()
 {}
 
 PresidentialPardonForm::PresidentialPardonForm(std::string target)
-		: AForm("PresidentialPardonForm", 25, 5), target(target)
+		: AForm("PresidentialPardonForm", 25, 5)
+		, target(target)
 {}
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm & other)
@@ -31,6 +32,10 @@ const std::string PresidentialPardonForm::getName() const {
 }
 
 int PresidentialPardonForm::getSignGrade() {
+	return AForm::getSignGrade();
+}
+
+int PresidentialPardonForm::getSignGrade() const {
 	return AForm::getSignGrade();
 }
 

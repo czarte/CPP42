@@ -19,6 +19,7 @@ class ShrubberyCreationForm : public AForm {
 		ShrubberyCreationForm &operator=(const ShrubberyCreationForm & other);
 		const std::string getName() const;
 		int getSignGrade();
+		int getSignGrade() const;
 		int getExecGrade();
 		int getExecGrade() const;
 		void beSigned(Bureaucrat & bureaucrat);
@@ -28,6 +29,16 @@ class ShrubberyCreationForm : public AForm {
 		void debug_execution(Bureaucrat exec) const;
 
 	class GradeTooLowExeptionToCreate : virtual public std::exception {
+	public:
+		const char * what() const throw();
+	};
+
+	class GradeTooLowExecuteExeptionToCreate : virtual public std::exception {
+	public:
+		const char * what() const throw();
+	};
+
+	class FormNotSignedException : virtual public std::exception {
 	public:
 		const char * what() const throw();
 	};

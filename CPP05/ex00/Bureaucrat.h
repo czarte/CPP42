@@ -5,7 +5,6 @@
 #ifndef CPP42_BUREAUCRAT_H
 #define CPP42_BUREAUCRAT_H
 #include <iostream>
-#include "custom_types.h"
 
 class Bureaucrat {
 	private:

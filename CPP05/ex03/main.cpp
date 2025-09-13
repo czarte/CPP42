@@ -8,10 +8,11 @@
 int main() {
 	std::cout << "hello bureaucrat world" << std::endl;
 	Bureaucrat minister = Bureaucrat("Ministry of justice", 5);
+	Bureaucrat lowleve = Bureaucrat("Schmucige", 130);
 	Intern intern;
-	AForm *a = intern.makeForm("shrubery", "home");
+	AForm *a = intern.makeForm("shrubery", "newhome");
 	minister.signForm(*a);
-	a->execute(minister);
+	try { a->execute(lowleve); } catch (std::exception & e) { std::cout << e.what(); }
 
 //	Bureaucrat b = Bureaucrat("Paul", 51);
 //	ShrubberyCreationForm c;
