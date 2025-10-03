@@ -20,7 +20,7 @@ int main() {
     // Serialize the Data pointer
     uintptr_t serialized = Serializer::serialize(originalData);
     std::cout << "Serialized value: " << serialized << std::endl;
-    std::cout << "Serialized value (hex): 0x" << std::hex << serialized << std::dec << std::endl;
+    std::cout << "Address of Serialized value (hex): 0x" << std::hex << serialized << std::dec << std::endl;
     std::cout << std::endl;
 
     // Deserialize back to Data pointer

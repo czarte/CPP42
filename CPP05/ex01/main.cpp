@@ -13,7 +13,11 @@ int main() {
 		std::cout << c;
 	}
 	Form d = Form("B51", 50, 150);
-	std::cout << d;
+	Form x = d;
+    std::cout << "------------X-------------" << std::endl;
+    std::cout << x;
+	std::cout << "------------D-------------" << std::endl;
+    std::cout << d;
 	b.signForm(d);
 	b.gradeDown();
 	std::cout << b;

@@ -6,6 +6,7 @@
 #define CPP42_SCALARCONVERTER_H
 
 #include <iostream>
+#include <climits>
 #include <string>
 
 class ScalarConverter {
@@ -16,6 +17,8 @@ class ScalarConverter {
         ScalarConverter& operator=(const ScalarConverter& other);
         ~ScalarConverter();
         static void convert(const std::string& literal);
+		static double to_double(const std::string &s, bool &ok);
+        static float to_float(const std::string &s, bool &ok);
 };
 
 

@@ -25,7 +25,7 @@ int main(int, char**)
     {
         if (mirror[i] != numbers[i])
         {
-            std::cerr << "didn't save the same value!!" << std::endl;
+            std::cout << "didn't save the same value!!" << std::endl;
             return 1;
         }
     }
@@ -35,7 +35,7 @@ int main(int, char**)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cout << e.what() << '\n';
     }
     try
     {
@@ -43,7 +43,7 @@ int main(int, char**)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cout << e.what() << '\n';
     }
 
     for (int i = 0; i < MAX_VAL; i++)

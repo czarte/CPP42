@@ -3,13 +3,12 @@
 #include "A.h"
 #include "B.h"
 #include "C.h"
-#include <__config>
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
 
 Base* generate(void) {
-    std::srand(std::time(nullptr));
+    std::srand(std::clock());
     int random = std::rand() % 3;
 
     switch (random) {
@@ -23,7 +22,7 @@ Base* generate(void) {
             std::cout << "Generated C" << std::endl;
             return new C();
         default:
-            return nullptr;
+            return NULL;
     }
 }
 
@@ -40,25 +39,8 @@ void identify(Base* p) {
 }
 
 void identify(Base& p) {
-    try {
-        (void)dynamic_cast<A&>(p);
-        std::cout << "A" << std::endl;
-        return;
-    } catch (const std::bad_cast&) {}
-    
-    try {
-        (void)dynamic_cast<B&>(p);
-        std::cout << "B" << std::endl;
-        return;
-    } catch (const std::bad_cast&) {}
-    
-    try {
-        (void)dynamic_cast<C&>(p);
-        std::cout << "C" << std::endl;
-        return;
-    } catch (const std::bad_cast&) {}
-    
-    std::cout << "Unknown type" << std::endl;
+     Base *b = &p;
+     identify(b);
 }
 
 int main() {

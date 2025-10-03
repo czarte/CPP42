@@ -4,7 +4,7 @@
 
 // Default constructor - creates empty array
 template<typename T>
-Array<T>::Array() : _data(nullptr), _size(0) {
+Array<T>::Array() : _data(NULL), _size(0) {
 }
 
 // Parameterized constructor - creates array of n elements

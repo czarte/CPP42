@@ -9,7 +9,7 @@
 Form::Form() : name("Default"), sign_grade(1), exec_grade(150) {}
 
 Form::Form(const std::string name, const int sign_grade, const int exec_grade)
-	: name(name), sign_grade(sign_grade), exec_grade(exec_grade)
+	: name(name), sign_grade(sign_grade), exec_grade(exec_grade), is_signed(false)
 {
 	if (exec_grade < 1 || sign_grade < 1)
 		throw GradeTooHighExeption();
@@ -18,8 +18,15 @@ Form::Form(const std::string name, const int sign_grade, const int exec_grade)
 }
 
 Form::Form(const Form & other)
-	: name(other.name), sign_grade(other.sign_grade), exec_grade(other.exec_grade)
+	: name(other.name), sign_grade(other.sign_grade), exec_grade(other.exec_grade), is_signed(false)
 {
+}
+
+Form &Form::operator=(const Form & other) {
+	if (this == &other)
+          return *this;
+
+	return (*this);
 }
 
 Form::~Form() {}
@@ -46,8 +53,6 @@ void Form::beSigned(Bureaucrat & bureaucrat) {
 	if (bureaucrat.getGrade() > this->getSignGrade()) {
 		throw GradeTooLowExeption();
 	}
-
-
 }
 
 std::ostream& operator<<(std::ostream &os, Form & form) {

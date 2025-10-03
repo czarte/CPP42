@@ -23,7 +23,8 @@ int main(int argc, char **argv) {
 		i = 4;
 	switch (i) {
 		case 0:
-			std::cout << "[DEBUG]" << std::endl;
+		{
+            std::cout << "[DEBUG]" << std::endl;
 			harl.complain("debug");
 			std::cout << std::endl << "[INFO]" << std::endl;
 			harl.complain("info");
@@ -31,7 +32,7 @@ int main(int argc, char **argv) {
 			harl.complain("warning");
 			std::cout << std::endl << "[ERROR]" << std::endl;
 			harl.complain("error");
-			break;
+        }
 		case 1:
 			std::cout << "[INFO]" << std::endl;
 			harl.complain("info");
@@ -39,20 +40,16 @@ int main(int argc, char **argv) {
 			harl.complain("warning");
 			std::cout << std::endl << "[ERROR]" << std::endl;
 			harl.complain("error");
-			break;
 		case 2:
 			std::cout << "[WARNING]" << std::endl;
 			harl.complain("warning");
 			std::cout  << std::endl << "[ERROR]" << std::endl;
 			harl.complain("error");
-			break;
 		case 3:
 			std::cout << "[ERROR]" << std::endl;
 			harl.complain("error");
-			break;
 		case 4:
 			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
-			break;
 	}
 
 	return (0);
