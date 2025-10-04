@@ -4,6 +4,7 @@
 
 #ifndef CPP42_SWAPTEMPLATE_H
 #define CPP42_SWAPTEMPLATE_H
+#include <stdexcept>
 
 template<typename T>
 void swap(T& a, T& b) {

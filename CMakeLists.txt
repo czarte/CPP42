@@ -35,4 +35,5 @@ add_executable(
         CPP05/ex03/Intern.cpp
         CPP05/ex03/Intern.h
         CPP06/ex00/ScalarConverter.cpp
-        CPP06/ex00/ScalarConverter.h)
+        CPP06/ex00/ScalarConverter.h
+        CPP08/ex00/EasyFind.h)

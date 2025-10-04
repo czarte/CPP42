@@ -62,7 +62,6 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
 	this->debug_execution(exec);
 	if ((exec.getGrade() <= this->getExecGrade()) && this->isSigned())  {
 		std::cout << exec.getName() << " executed " << this->getName() << std::endl;
-		//const char* file = static_cast<const char*>(this->target);
 		std::ofstream outFile(this->target.c_str());
 		if (!outFile) {
 			std::cerr << "Error opening file for writing!" << std::endl;
