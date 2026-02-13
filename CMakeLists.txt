@@ -35,4 +35,20 @@ add_executable(
         CPP05/ex03/Intern.cpp
         CPP05/ex03/Intern.h
         CPP06/ex00/ScalarConverter.cpp
-        CPP06/ex00/ScalarConverter.h)
+        CPP06/ex00/ScalarConverter.h
+        CPP06/ex01/Serializer.cpp
+        CPP06/ex01/Serializer.h
+        CPP06/ex01/Data.cpp
+        CPP06/ex01/Data.h
+        CPP06/ex02/Base.cpp
+        CPP06/ex02/Base.h
+        CPP06/ex02/A.cpp
+        CPP06/ex02/A.h
+        CPP06/ex02/B.cpp
+        CPP06/ex02/B.h
+        CPP06/ex02/C.cpp
+        CPP06/ex02/C.h
+        CPP07/ex00/swaptemplate.cpp
+        CPP07/ex00/swaptemplate.h
+        CPP07/ex01/iter.h
+        CPP07/ex02/Array.h)
