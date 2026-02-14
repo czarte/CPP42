@@ -1,18 +1,15 @@
-SRC = main.cpp
+SRC = main.cpp Span.cpp
 OBJ = $(SRC:.cpp=.o)
-CC = g++
+CC = c++
 RM = rm -f
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
-NAME = easyfind
+NAME = span
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 		$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
-
-#%.o: %.cpp
-#		$(CC) -c -o $< $(CPPFLAGS)
 
 clean:
 		$(RM) $(OBJ)
