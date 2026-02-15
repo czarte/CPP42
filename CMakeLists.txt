@@ -39,4 +39,8 @@ add_executable(
         CPP08/ex00/EasyFind.h
         CPP08/ex00/main.cpp
         CPP08/ex01/Span.cpp
-        CPP08/ex01/Span.hpp)
+        CPP08/ex01/Span.hpp
+        CPP08/ex02/MutantStack.tpp
+        CPP08/ex02/MutantStack.hpp
+        CPP09/ex00/BitcoinExchange.cpp
+        CPP09/ex00/BitcoinExchange.hpp)
