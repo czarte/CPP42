@@ -9,6 +9,13 @@
 #include <climits>
 #include <string>
 
+enum ScalarType {
+  CHAR,
+  INT,
+  FLOAT,
+  DOUBLE
+};
+
 class ScalarConverter {
     private:
     public:

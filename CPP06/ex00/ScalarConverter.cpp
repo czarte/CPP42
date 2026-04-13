@@ -5,6 +5,7 @@
 #include "ScalarConverter.h"
 #include <limits>
 #include <sstream>
+#include <typeinfo>
 
 template <typename T>
 bool is_pos_inf(T num) {
@@ -14,6 +15,62 @@ bool is_pos_inf(T num) {
 template <typename T>
 bool is_neg_inf(T num) {
     return num == -std::numeric_limits<T>::infinity();
+}
+
+bool isAllDigits(const std::string& str) {
+	for (unsigned int i = 0; i < str.length(); i++) {
+          if (i == 0 && str[i] == '-')
+            continue;
+          if (!isdigit(str[i])) {
+            return false;
+          }
+	}
+    return true;
+}
+
+bool hasPointAndSuffix(const std::string& str) {
+  int points = 0;
+
+  if (str[str.length() -1] != 'f')
+    return false;
+
+  for (unsigned int i = 0; i < str.length(); i++) {
+    if (i == 0 && str[i] == '-')
+            continue;
+	if(str[i] == '.') {
+          points++;
+	}
+  }
+  if (points != 1) {
+    return false;
+  }
+  return true;
+}
+
+bool hasOnlyPoint(const std::string& str) {
+  	int points = 0;
+
+	for (unsigned int i = 0; i < str.length(); i++) {
+          if (i == 0 && str[i] == '-')
+            continue;
+          if (str[i] == '.') {
+            points++;
+          } else if (!isdigit(str[i])) {
+            return false;
+          }
+	}
+    return true;
+}
+
+ScalarType decideType(const std::string& s) {
+  if (isAllDigits(s)) {
+    return INT;
+  } else if (hasPointAndSuffix(s)) {
+    return FLOAT;
+  } else if (hasOnlyPoint(s)) {
+    return DOUBLE;
+  }
+  return CHAR;
 }
 
 double ScalarConverter::to_double(const std::string &s, bool &ok) {
@@ -46,86 +103,88 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other) {
 ScalarConverter::~ScalarConverter() {}
 
 void ScalarConverter::convert(const std::string& literal) {
-    // Convert to char
-    std::cout << "char: ";
-    bool ok;
-    try {
-        if (literal.length() == 1 && !std::isdigit(literal[0])) {
-            char c = literal[0];
-            if (std::isprint(c))
-                std::cout << "'" << c << "'" << std::endl;
-            else
-                std::cout << "Non displayable" << std::endl;
-        } else {
-            double d = to_double(literal, ok);
-            if (ok && (d < 0 || d > 127 || !std::isdigit(d) || is_pos_inf(d) || is_neg_inf(d)))
-                std::cout << "impossible" << std::endl;
-            else if (std::isprint(static_cast<char>(d)))
-                std::cout << "'" << static_cast<char>(d) << "'" << std::endl;
-            else
-                std::cout << "Non displayable" << std::endl;
-        }
-    } catch (...) {
-        std::cout << "impossible" << std::endl;
-    }
+	std::istringstream iss(literal);
+	int i;
+	iss >> i;
+  	switch (decideType(literal)) {
+        case CHAR:
+            std::cout << "char: ";
+    		try {
+    		   	if (std::isprint(i))
+    		        std::cout << "'" << (char) i << "'" << std::endl;
+				else
+   		            std::cout << "Non displayable" << std::endl;
+    		} catch (...) {
+    			std::cout << "impossible" << std::endl;
+			}
+            std::cout << "int: " << static_cast<int>(i) << std::endl;
+            std::cout << "float: " << static_cast<float>(i) << std::endl;
+            std::cout << "double: " << static_cast<float>(i) << std::endl;
+        break;
+        case INT:
+          	std::cout << "char: ";
+          	if (i > -128 && i <= 127) {
+    		        if (std::isprint(i))
+    		            std::cout << "'" << (char) i << "'" << std::endl;
+     		       else
+   		             std::cout << "Non displayable" << std::endl;
+    		} else
+                  std::cout << "impossible" << std::endl;
+        	std::cout << "int: ";
+    		try {
+    		    if (i > INT_MIN && i < INT_MAX) {
+    		        std::cout << i << std::endl;
+    		    }
+    		} catch (...) {
+    			    std::cout << "impossible" << std::endl;
+    		}
+            std::cout << "float: " << static_cast<float>(i) << std::endl;
+            std::cout << "double: " << static_cast<double>(i) << std::endl;
+        break;
+        case FLOAT:
+          		std::cout << "char: ";
+          		if (i > -128 && i <= 127) {
+    		        if (std::isprint(i))
+    		            std::cout << "'" << (char) i << "'" << std::endl;
+     		       else
+   		             std::cout << "Non displayable" << std::endl;
+    			} else
+                  std::cout << "impossible" << std::endl;
+        		std::cout << "int: ";
+    			try {
+    		    	if (i > INT_MIN && i < INT_MAX) {
+    		     		std::cout << i << std::endl;
+    		   		}
+    			} catch (...) {
+    			    std::cout << "impossible" << std::endl;
+    			}
+                std::cout << "float: ";
+    			try {
+      				std::istringstream iss(literal);
+					float f;
+        			iss >> f;
+        			if (typeid(f) == typeid(float)) {
+          				std::cout << f << "f" << std::endl;
+        			}
+    			} catch (...) {
+    				std::cout << "impossible" << std::endl;
+   				}
+                std::cout << "double: " << static_cast<double>(i) << std::endl;
+        break;
+        case DOUBLE:
+            std::cout << "double: ";
+ 			try {
+      			std::istringstream iss(literal);
+				double d;
+        		iss >> d;
+        		if (typeid(d) == typeid(double)) {
+           			std::cout << d << std::endl;
+        		}
+    		} catch (...) {
+ 		       	std::cout << "impossible" << std::endl;
+    		}
+		break;
+  	}
 
-    // Convert to int
-    std::cout << "int: ";
-    try {
-        if (literal.length() == 1 && !std::isdigit(literal[0])) {
-            std::cout << static_cast<int>(literal[0]) << std::endl;
-        } else {
-            double d = to_double(literal, ok);
-            if (ok && (d < INT_MIN || d > INT_MAX || !std::isdigit(d) || is_pos_inf(d) || is_neg_inf(d)))
-                std::cout << "impossible" << std::endl;
-            else
-                std::cout << static_cast<int>(d) << std::endl;
-        }
-    } catch (...) {
-        std::cout << "impossible" << std::endl;
-    }
 
-    // Convert to float
-    std::cout << "float: ";
-    try {
-        if (literal.length() == 1 && !std::isdigit(literal[0])) {
-            std::cout << static_cast<float>(literal[0]) << ".0f" << std::endl;
-        } else {
-            double f = to_double(literal, ok);
-            if (ok && !std::isdigit(f))
-                std::cout << "nanf" << std::endl;
-            else if (ok && (is_pos_inf(f) || is_neg_inf(f)))
-                std::cout << (f > 0 ? "+inff" : "-inff") << std::endl;
-            else {
-                std::cout << f;
-                if (f == static_cast<int>(f))
-                    std::cout << ".0";
-                std::cout << "f" << std::endl;
-            }
-        }
-    } catch (...) {
-        std::cout << "impossible" << std::endl;
-    }
-
-    // Convert to double
-    std::cout << "double: ";
-    try {
-        if (literal.length() == 1 && !std::isdigit(literal[0])) {
-            std::cout << static_cast<double>(literal[0]) << ".0" << std::endl;
-        } else {
-            double d = to_double(literal, ok);
-            if (ok && !std::isdigit(d))
-                std::cout << "nan" << std::endl;
-            else if (ok && (is_pos_inf(d) || is_neg_inf(d)))
-                std::cout << (d > 0 ? "+inf" : "-inf") << std::endl;
-            else {
-                std::cout << d;
-                if (d == static_cast<int>(d))
-                    std::cout << ".0";
-                std::cout << std::endl;
-            }
-        }
-    } catch (...) {
-        std::cout << "impossible" << std::endl;
-    }
 }
