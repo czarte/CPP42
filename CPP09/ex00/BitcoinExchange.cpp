@@ -17,7 +17,11 @@ std::vector<std::string> split(const std::string & s, const std::string & delimi
 	return tokens;
 }
 
-BitcoinExchange::BitcoinExchange() {}
+BitcoinExchange::BitcoinExchange() {
+	std::ifstream data("data.csv");
+	if (!data.is_open())
+		throw(std::string) "cannot open data";
+}
 BitcoinExchange::BitcoinExchange(std::string file) : _file(file) {
 	std::cout << "BitcoinExchange constructed" << std::endl;
 }
