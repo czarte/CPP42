@@ -13,7 +13,9 @@ enum ScalarType {
   CHAR,
   INT,
   FLOAT,
-  DOUBLE
+  DOUBLE,
+  PSEUDO_LITERAL,
+  INVALID
 };
 
 class ScalarConverter {
