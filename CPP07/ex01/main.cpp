@@ -8,7 +8,7 @@ void increment(T &e) {
 }
 
 template<typename T>
-void print(T &e) {
+void print(const T &e) {
     std::cout << e << std::endl;
 }
 

@@ -2,6 +2,7 @@
 // Created by Vojtěch Parkán on 14.02.2026.
 //
 #include "Span.hpp"
+#include <iostream>
 
 Span::Span(size_t size) : _size(size) {}
 Span::~Span() {}
@@ -28,7 +29,7 @@ int Span::shortestSpan() {
 	std::vector<int> temp = this->_vec;
 	std::sort(temp.begin(), temp.end());
 	int min = std::numeric_limits<int>::max();
-	for (size_t size = 0; size < this->_size; ++size) {
+	for (size_t size = 0; size < this->_size - 1; ++size) {
 		int span = temp[size + 1] - temp[size];
 		if (span < min)
 			min = span;

@@ -34,8 +34,16 @@ void push_many(std::vector<T>& v, const A& a, const B& b) { \
 
 int main(void) {
 	Span s(2);
-	push_many(s.get_vec(), 1, 2, 3, 4, 14, 17);
+	push_many(s.get_vec(), 1, 20, 30, 4, 14, 17);
 	std::cout << "Shortest span: " << s.shortestSpan() << std::endl;
 	std::cout << "Largest span: " << s.longestSpan() << std::endl;
+	Span sp = Span(5);
+	sp.addNumber(6);
+	sp.addNumber(3);
+	sp.addNumber(17);
+	sp.addNumber(9);
+	sp.addNumber(11);
+	std::cout << "Shortest span: " << sp.shortestSpan() << std::endl;
+	std::cout << "Largest span: " << sp.longestSpan() << std::endl;
 	return 0;
 }

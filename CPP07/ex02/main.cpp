@@ -9,7 +9,9 @@ int main(int, char**)
 	int * a = new int(10);
     int * w = new int(*a);
     int * t = w;
+	int * g = new int();
 	std::cout << *a << std::endl;
+	std::cout << *g << std::endl;
 	Array<int> b = Array<int>(10);
     Array<int> c = b;
     Array<int> d = Array<int>(c);
@@ -19,32 +21,32 @@ int main(int, char**)
     b[1] = 4;
     c[0] = 5;
     std::cout << "---------t----------" << std::endl;
-    for(int i = 0; i < 9; i++) {
+    for(int i = 0; i < 10; i++) {
     	std::cout << "[" << t[i] << "], ";
     }
     std::cout << std::endl;
     std::cout << "---------w----------" << std::endl;
-    for(int i = 0; i < 9; i++) {
+    for(int i = 0; i < 10; i++) {
     	std::cout << "[" << w[i] << "], ";
     }
     std::cout << std::endl;
     std::cout << "---------d----------" << std::endl;
-    for(int i = 0; i < 9; i++) {
+    for(int i = 0; i < 10; i++) {
     	std::cout << "[" << d[i] << "], ";
     }
     std::cout << std::endl;
     std::cout << "---------c----------" << std::endl;
-    for(int i = 0; i < 9; i++) {
+    for(int i = 0; i < 10; i++) {
     	std::cout << "[" << c[i] << "], ";
     }
 	std::cout << std::endl;
     std::cout << "---------b----------" << std::endl;
-    for(int i = 0; i < 9; i++) {
+    for(int i = 0; i < 10; i++) {
     	std::cout << "[" << b[i] << "], ";
     }
 	std::cout << std::endl;
     std::cout << "---------a----------" << std::endl;
-    for(int i = 0; i < 9; i++) {
+    for(int i = 0; i < 10; i++) {
     	std::cout << "[" << a[i] << "], ";
     }
 	std::cout << std::endl;

@@ -5,8 +5,6 @@
 #include "ScalarConverter.h"
 #include <limits>
 #include <sstream>
-#include <typeinfo>
-#include <numbers>
 #include <iomanip>
 #include <cstdlib>
 
