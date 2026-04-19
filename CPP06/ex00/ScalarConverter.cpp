@@ -150,7 +150,7 @@ void ScalarConverter::convert(const std::string& literal) {
 			std::cout << "char: ";
 			try {
 				if (std::isprint(static_cast<char>(i)))
-					std::cout << "'" << ch << "'" << std::endl;
+					std::cout << "'" << static_cast<char>(i) << "'" << std::endl;
 				else
 					std::cout << "Non displayable" << std::endl;
 			} catch (...) {
@@ -227,8 +227,30 @@ void ScalarConverter::convert(const std::string& literal) {
 			}
 		break;
 		case PSEUDO_LITERAL:
+			if (literal == "nan" || literal == "nanf") {
+				std::cout << "char: impossible" << std::endl;
+				std::cout << "int: impossible" << std::endl;
+				std::cout << "float: " << "nanf" << std::endl;
+				std::cout << "double: " << "nan" << std::endl;
+			}
+			if (literal == "+inf" || literal == "+inff" || literal == "inf" || literal == "inff") {
+				std::cout << "char: impossible" << std::endl;
+				std::cout << "int: impossible" << std::endl;
+				std::cout << "float: " << "+inff" << std::endl;
+				std::cout << "double: " << "+inf" << std::endl;
+			}
+			if (literal == "-inf" || literal == "-inff") {
+				std::cout << "char: impossible" << std::endl;
+				std::cout << "int: impossible" << std::endl;
+				std::cout << "float: " << "-inff" << std::endl;
+				std::cout << "double: " << "-inf" << std::endl;
+			}
 		break;
 		case INVALID:
+			std::cout << "char: impossible" << std::endl;
+			std::cout << "int: impossible" << std::endl;
+			std::cout << "float: impossible" << std::endl;
+			std::cout << "double: impossible" << std::endl;
 		break;
   	}
 
