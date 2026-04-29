@@ -35,11 +35,11 @@ void createPairs(T * list_pairs, char ** input, int * additional_value) {
 	while (input[i]) {
 		int x = std::atoi(input[i]);
 		if (x < 0)
-			throw std::out_of_range("Only positive values");
+			throw std::out_of_range("Error: Only positive values");
 		if (input[i] && input[i + 1]) {
 			int y = std::atoi(input[i + 1]);
 			if (y < 0)
-				throw std::out_of_range("Only positive values");
+				throw std::out_of_range("Error: Only positive values");
 			std::pair<int, int> temp(x, y);
 			list_pairs->push_back(temp);
 			i += 2;

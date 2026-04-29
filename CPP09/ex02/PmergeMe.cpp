@@ -55,7 +55,6 @@ void mergeSort(std::list<std::pair<int, int> >::iterator start, std::list<std::p
 	std::inplace_merge(start, center, end, &PmergeMe::compare_size);
 }
 
-
 void mergeSort(std::deque<std::pair<int, int> >::iterator start, std::deque<std::pair<int, int> >::iterator end, size_t size) {
 	if (size == 0 && start != end)
 		size = std::distance(start, end);
