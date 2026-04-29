@@ -48,6 +48,7 @@ void BitcoinExchange::parseFile() {
 			std::cout << "found: " << line.find("exchange_rate") << std::endl;
 			continue;
 		}
+		//TODO change this to array
 		std::vector<std::string> spl = split(line, ",");
 		float ix;
 		std::istringstream iss(spl[1]);
