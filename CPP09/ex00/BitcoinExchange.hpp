@@ -9,13 +9,16 @@
 #include <map>
 #include <fstream>
 #include <string>
-#include <vector>
 #include <sys/types.h>
+#include <sstream>
+#include <ctime>
+#include <iomanip>
 
 class BitcoinExchange {
 private:
 	std::string _file;
-	std::map<std::string, float> _dateval;
+	std::string _data;
+	std::map<std::string, double> _rates;
 public:
 	BitcoinExchange();
 	~BitcoinExchange();
@@ -23,7 +26,11 @@ public:
 	BitcoinExchange(const BitcoinExchange & other);
 	BitcoinExchange& operator=(const BitcoinExchange & src);
 
+	void validate_file(std::string data_file, std::string input_file);
+	void run_filedata();
+	void fill_exchangedata();
 	void parseFile();
+
 };
 
 
