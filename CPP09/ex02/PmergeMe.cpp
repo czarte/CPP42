@@ -4,18 +4,18 @@
 
 #include "PmergeMe.hpp"
 
-size_t PmergeMe::jacobsthal_recursion(int n) {
+size_t PmergeMe::jacobsthalRecursion(int n) {
 	if (n == 0)
 		return (size_t) 0;
 	if (n == 1)
 		return (size_t) 1;
 	else
-		return size_t (PmergeMe::jacobsthal_recursion(n - 1) + 2 * PmergeMe::jacobsthal_recursion(n - 2));
+		return size_t (PmergeMe::jacobsthalRecursion(n - 1) + 2 * PmergeMe::jacobsthalRecursion(n - 2));
 }
 std::vector<size_t> PmergeMe::jacobsthal() {
 	std::vector<size_t> jv;
 	for (int i = 0; i < JAC; ++i) {
-		size_t n = PmergeMe::jacobsthal_recursion(i);
+		size_t n = PmergeMe::jacobsthalRecursion(i);
 		if (n != 0) {
 			jv.push_back(n);
 		}
@@ -23,7 +23,7 @@ std::vector<size_t> PmergeMe::jacobsthal() {
 	}
 	return jv;
 }
-bool PmergeMe::compare_size(std::pair<int, int> a, std::pair<int, int> b) {
+bool PmergeMe::compareSize(std::pair<int, int> a, std::pair<int, int> b) {
 	return (a.second < b.second);
 }
 void PmergeMe::printInput(char ** argv, int argc) {
@@ -33,7 +33,7 @@ void PmergeMe::printInput(char ** argv, int argc) {
 	}
 	std::cout << std::endl;
 }
-void PmergeMe::print_pairs(std::list<std::pair<int, int> > list_pairs) {
+void PmergeMe::printPairs(std::list<std::pair<int, int> > list_pairs) {
 	std::cout << "list_pairs: ";
 	for (std::list<std::pair<int, int> >::iterator it = list_pairs.begin(); it != list_pairs.end(); it++)
 		std::cout << "|" << it->first << ", " << it->second << "| ";
@@ -52,7 +52,7 @@ void mergeSort(std::list<std::pair<int, int> >::iterator start, std::list<std::p
 
 	mergeSort(start, center, firstHalf);
 	mergeSort(center, end, secondHalf);
-	std::inplace_merge(start, center, end, &PmergeMe::compare_size);
+	std::inplace_merge(start, center, end, &PmergeMe::compareSize);
 }
 
 void mergeSort(std::deque<std::pair<int, int> >::iterator start, std::deque<std::pair<int, int> >::iterator end, size_t size) {
@@ -67,7 +67,7 @@ void mergeSort(std::deque<std::pair<int, int> >::iterator start, std::deque<std:
 
 	mergeSort(start, center, firstHalf);
 	mergeSort(center, end, secondHalf);
-	std::inplace_merge(start, center, end, &PmergeMe::compare_size);
+	std::inplace_merge(start, center, end, &PmergeMe::compareSize);
 }
 
 
@@ -109,7 +109,7 @@ void mergeSort(std::deque<std::pair<int, int> >::iterator start, std::deque<std:
 //		results->push_front(list_pairs.begin()->first);
 //	}
 //}
-//void binary_search_insertion(std::list<int> *results, std::list<int>::iterator end, int val) {
+//void binarySearchInsertion(std::list<int> *results, std::list<int>::iterator end, int val) {
 //	std::list<int>::iterator insert_pos = std::lower_bound(results->begin(), end, val);
 //	results->insert(insert_pos, val);
 ///*
@@ -137,7 +137,7 @@ void mergeSort(std::deque<std::pair<int, int> >::iterator start, std::deque<std:
 //		int insertion_index = 0;
 //		while (jabobsthal[jacobsthal_index] - insertion_index > jabobsthal[jacobsthal_index - 1]) {
 //			slice_delimiter = std::find(results->begin(), results->end(), pair_iterator->second);
-//			binary_search_insertion(results, slice_delimiter, pair_iterator->first);
+//			binarySearchInsertion(results, slice_delimiter, pair_iterator->first);
 //			pair_iterator--;
 //			insertion_index++;
 //		}
@@ -150,12 +150,12 @@ void mergeSort(std::deque<std::pair<int, int> >::iterator start, std::deque<std:
 //			pair_iterator--;
 //		while (pair_iterator != last_jacobsthal) {
 //			slice_delimiter = std::find(results->begin(), results->end(), pair_iterator->first);
-//			binary_search_insertion(results, slice_delimiter, pair_iterator->first);
+//			binarySearchInsertion(results, slice_delimiter, pair_iterator->first);
 //			pair_iterator--;
 //		}
 //	}
 //	if (additional_value != -1) {
-//		binary_search_insertion(results, results->end(), additional_value);
+//		binarySearchInsertion(results, results->end(), additional_value);
 //	}
 //
 //}

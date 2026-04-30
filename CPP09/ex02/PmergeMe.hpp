@@ -19,11 +19,11 @@
 
 class PmergeMe {
 public:
-	static bool compare_size(std::pair<int, int> a, std::pair<int, int> b);
-	static size_t jacobsthal_recursion(int n);
+	static bool compareSize(std::pair<int, int> a, std::pair<int, int> b);
+	static size_t jacobsthalRecursion(int n);
 	static std::vector<size_t> jacobsthal();
 	static void printInput(char ** argv, int argc);
-	static void print_pairs(std::list<std::pair<int, int> > list_pairs);
+	static void printPairs(std::list<std::pair<int, int> > list_pairs);
 };
 
 void mergeSort(std::list<std::pair<int, int> >::iterator start, std::list<std::pair<int, int> >::iterator end, size_t size);
@@ -72,22 +72,22 @@ void initResult(M * results, T list_pairs, IT it) {
 	}
 }
 template<typename M, typename I, typename IT>
-void binary_search_insertion(M *results, I end, int val, IT insert_pos) {
+void binarySearchInsertion(M *results, I end, int val, IT insert_pos) {
 	insert_pos = std::lower_bound(results->begin(), end, val);
 	results->insert(insert_pos, val);
 /*
 	std::cout << "result current value: " << val << " : end iterator " << *end << " place to insert: " << *(insert_pos--) << std::endl;
-	for (std::list<int>::iterator it = results->begin(); it != results->end(); it++) {
-		std::cout << *it << " ";
+	for (insert_pos = results->begin(); insert_pos != results->end(); insert_pos++) {
+		std::cout << *insert_pos << " ";
 	}
-	std::cout << std::endl;
-*/
+	std::cout << std::endl;*/
+
 }
 template<typename T, typename M, typename I, typename JI, typename SD, typename IT>
 void insertIntoResult(T list_pairs, M * results, int additional_value, I pair_iterator, JI last_jacobsthal, SD slice_delimiter, IT insert_pos) {
 	std::vector<size_t> jabobsthal = PmergeMe::jacobsthal();
 	//size_t jabobsthal[] = {1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 349525, 699051, 1398101, 2796203, 5592405, 11184811, 22369621, 44739243, 89478485, 178956971, 357913941, 715827883, 1431655765};
-	int jacobsthal_index = 1;
+	int jacobsthal_index = 2;
 
 	last_jacobsthal = list_pairs.begin();
 
@@ -99,7 +99,7 @@ void insertIntoResult(T list_pairs, M * results, int additional_value, I pair_it
 		int insertion_index = 0;
 		while (jabobsthal[jacobsthal_index] - insertion_index > jabobsthal[jacobsthal_index - 1]) {
 			slice_delimiter = std::find(results->begin(), results->end(), pair_iterator->second);
-			binary_search_insertion(results, slice_delimiter, pair_iterator->first, insert_pos);
+			binarySearchInsertion(results, slice_delimiter, pair_iterator->first, insert_pos);
 			pair_iterator--;
 			insertion_index++;
 		}
@@ -112,12 +112,12 @@ void insertIntoResult(T list_pairs, M * results, int additional_value, I pair_it
 			pair_iterator--;
 		while (pair_iterator != last_jacobsthal) {
 			slice_delimiter = std::find(results->begin(), results->end(), pair_iterator->first);
-			binary_search_insertion(results, slice_delimiter, pair_iterator->first, insert_pos);
+			binarySearchInsertion(results, slice_delimiter, pair_iterator->first, insert_pos);
 			pair_iterator--;
 		}
 	}
 	if (additional_value != -1) {
-		binary_search_insertion(results, results->end(), additional_value, insert_pos);
+		binarySearchInsertion(results, results->end(), additional_value, insert_pos);
 	}
 }
 template<typename M, typename I>

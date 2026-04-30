@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 	try
 	{
 		RPN rpn(argv[1]);
-		std::cout << rpn.get_result() << std::endl;
+		std::cout << rpn.getResult() << std::endl;
 	}
 	catch (std::exception &e)
 	{

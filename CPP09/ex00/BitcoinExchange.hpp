@@ -13,24 +13,25 @@
 #include <sstream>
 #include <ctime>
 #include <iomanip>
+#include <algorithm>
+#include <stack>
 
 class BitcoinExchange {
 private:
-	std::string _file;
-	std::string _data;
+	const char* _file;
+	const char* _data;
 	std::map<std::string, double> _rates;
 public:
 	BitcoinExchange();
 	~BitcoinExchange();
-	BitcoinExchange(std::string file);
+	BitcoinExchange(const char* file);
 	BitcoinExchange(const BitcoinExchange & other);
 	BitcoinExchange& operator=(const BitcoinExchange & src);
 
-	void validate_file(std::string data_file, std::string input_file);
-	void run_filedata();
-	void fill_exchangedata();
+	void validateFile(const char* data_file, const char* input_file);
+	void runFiledata();
+	void fillExchangedata();
 	void parseFile();
-
 };
 
 

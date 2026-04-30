@@ -24,7 +24,7 @@ RPN::RPN(const std::string & input) {
 		} else if (variable == "/") {
 			_execute(&RPN::_divide);
 		} else
-			throw RPN::invalidArgument("Invalid argument " + variable);
+			throw RPN::invalidArgument("Error: Invalid argument " + variable);
 	}
 }
 
@@ -45,7 +45,7 @@ RPN::invalidArgument::invalidArgument(const std::string &msg) : std::runtime_err
 RPN::emptyStack::emptyStack(const std::string &msg) : std::runtime_error(msg) {}
 RPN::divisionZero::divisionZero(const std::string &msg) : std::runtime_error(msg) {}
 
-double RPN::get_result() const {
+double RPN::getResult() const {
 	if (_stack.empty())
 		throw RPN::emptyStack("Empty stack");
 //	else if (_stack.size() > 1)

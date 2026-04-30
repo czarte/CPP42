@@ -22,23 +22,25 @@ void trim(std::string & str, const std::string & trimChars = whiteSpaces) {
 	trimLeft(str, trimChars);
 }
 
-std::array<std::string, 2> split(const std::string & s, const std::string & delimiter) {
-	std::array<std::string, 2> tokens;
+std::stack<std::string> split(const std::string & s, const std::string & delimiter) {
+	std::stack<std::string> tokens;
 	size_t pos = 0;
 	std::string token;
 	pos = s.find(delimiter);
 	token = s.substr(0, pos);
 	trim(token, whiteSpaces);
-	tokens[0] = token;
+	tokens.push(token);
 	token = s.substr(pos + 1, std::string::npos);
 	trim(token, whiteSpaces);
-	tokens[1] = token;
+	tokens.push(token);
 	return tokens;
 }
 
-void BitcoinExchange::validate_file(std::string data_file, std::string input_file) {
-	std::ifstream data(data_file);
-	std::ifstream input(input_file);
+void BitcoinExchange::validateFile(const char* data_file, const char* input_file) {
+	std::fstream data;
+	std::fstream input;
+    data.open(data_file, std::fstream::in);
+    input.open(input_file, std::fstream::in);
 	if (!data.is_open() || !input.is_open())
 		throw(std::string) "cannot open data.csv or input.txt ";
 	data.close();
@@ -49,15 +51,15 @@ void BitcoinExchange::validate_file(std::string data_file, std::string input_fil
 
 BitcoinExchange::BitcoinExchange() {
 	try {
-		validate_file("data.csv", "input.txt");
+		validateFile("data.csv", "input.txt");
 	} catch (std::string e) {
 		std::cerr << e << std::endl;
 		exit(1);
 	}
 }
-BitcoinExchange::BitcoinExchange(std::string file) : _file(file) {
+BitcoinExchange::BitcoinExchange(const char* file) : _file(file) {
 	try {
-		validate_file("data.csv", file);
+		validateFile("data.csv", file);
 	} catch (std::string e) {
 		std::cerr << e << std::endl;
 		exit(1);
@@ -101,37 +103,41 @@ bool validateDate(std::string date) {
 	return (true);
 }
 
-void BitcoinExchange::run_filedata() {
-	std::ifstream infile(_file);
+void BitcoinExchange::runFiledata() {
+	std::fstream infile;
+    infile.open(_file, std::fstream::in);
 	std::string line;
 	while (std::getline(infile, line) && line.length() != 0)
 	{
 		if (line == "date | value") {
 			continue;
 		}
-		std::array<std::string, 2> spl;
 		double ix;
 		std::string date;
+		std::string token;
 		if (line.find('|') != std::string::npos) {
-			spl = split(line, "|");
-			date = spl[0];
+			std::stack<std::string> spl = split(line, "|");
+			token = spl.top();
+            spl.pop();
+            date = spl.top();
 			trim(date, whiteSpaces);
+            //std::cout << "DEBUG " << date << " | " << token << std::endl;
 			if (!validateDate(date)) {
-				spl[0] = "Error: Wromg Date format " + spl[0];
+				date = "Error: Wromg Date format " + date;
 			}
-			std::istringstream iss(spl[1]);
+			std::istringstream iss(token);
 			iss >> ix;
 			if (ix > 1000) {
-				spl[0] = "Error: too large a number.";
+				token = "Error: too large a number.";
 			}
 			if (ix < 0) {
-				spl[0] = "Error: not a positive number.";
+				token = "Error: not a positive number.";
 			}
 		} else {
-			spl[0] = "Error: bad input => " + line;
+			token = "Error: bad input => " + line;
 		}
-		if (spl[0].find("Error:") != std::string::npos) {
-			std::cout << spl[0] << std::endl;
+		if (token.find("Error:") != std::string::npos) {
+			std::cout << token << std::endl;
 		} else {
 			std::map<std::string, double>::iterator it = _rates.find(date);
 			double rate;
@@ -149,7 +155,7 @@ void BitcoinExchange::run_filedata() {
 	infile.close();
 }
 
-void BitcoinExchange::fill_exchangedata() {
+void BitcoinExchange::fillExchangedata() {
 	std::ifstream infile(_data);
 	std::string line;
 	while (std::getline(infile, line) && line.length() != 0)
@@ -157,22 +163,20 @@ void BitcoinExchange::fill_exchangedata() {
 		if (line.find("exchange_rate") != std::string::npos) {
 			continue;
 		}
-		std::array<std::string, 2> spl = split(line, ",");
+		std::stack<std::string> spl = split(line, ",");
+        std::string token = spl.top();
+        spl.pop();
+        std::string date = spl.top();
 		double ix;
-		std::istringstream iss(spl[1]);
+		std::istringstream iss(token);
+        //std::cout << "DEBUG RATE " << date << " | " << token << std::endl;
 		iss >> ix;
-		std::string date = spl[0];
-		trim(date, whiteSpaces);
 		_rates.insert(std::map<std::string, double>::value_type(date, ix));
 	}
 	infile.close();
 }
 
 void BitcoinExchange::parseFile() {
-	fill_exchangedata();
-//	std::cout << "rates" << std::endl;
-//	for (std::map<std::string , double>::const_iterator it = _rates.begin(); it != _rates.end(); it++) {
-//		std::cout << it->first << "|" << it->second << std::endl;
-//	}
-	run_filedata();
+	fillExchangedata();
+	runFiledata();
 }

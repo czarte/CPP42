@@ -5,6 +5,7 @@ int main(int argc, char ** argv) {
 		std::cerr << "No numbers provided\n";
 		return (1);
 	}
+    bool pass = true;
 	//std::list solution
 	{
 		std::list<std::pair<int, int> > list_pairs;
@@ -21,7 +22,7 @@ int main(int argc, char ** argv) {
 		try {
 			createPairs(&list_pairs, argv, &additional_value);
 			sortPairs(&list_pairs, pair_it);
-			//PmergeMe::print_pairs(list_pairs);
+			//PmergeMe::printPairs(list_pairs);
 			mergeSort(list_pairs.begin(), list_pairs.end(), 0);
 			initResult(&results, list_pairs, pair_it);
 			insertIntoResult(list_pairs, &results, additional_value, pair_it, last_jacobsthal, slice_delimiter, it);
@@ -33,10 +34,11 @@ int main(int argc, char ** argv) {
 					  << std::endl;
 		} catch (const std::exception &e) {
 			std::cerr << e.what() << std::endl;
-			exit(1);
+			pass = false;
 		}
 	}
 	//std::deque solution
+    if (pass)
 	{
 		std::deque<std::pair<int, int> > list_pairs;
 		std::deque<int> results;
@@ -52,9 +54,11 @@ int main(int argc, char ** argv) {
 		try {
 			createPairs(&list_pairs, argv, &additional_value);
 			sortPairs(&list_pairs, pair_it);
-			//print_pairs(list_pairs);
+			//printPairs(list_pairs);
 			mergeSort(list_pairs.begin(), list_pairs.end(), 0);
 			initResult(&results, list_pairs, pair_it);
+			//std::cout << std::endl << "DEBUG: Result after initialization" << std::endl;
+			//printOutput(results, it);
 			insertIntoResult(list_pairs, &results, additional_value, pair_it, last_jacobsthal, slice_delimiter, it);
 			//printOutput(results, it);
 			clock_t end = clock();

@@ -26,7 +26,7 @@ public:
 	RPN &operator=(const RPN & src);
 	~RPN();
 
-	double get_result() const;
+	double getResult() const;
 
 	class invalidArgument : public std::runtime_error {
 	public:
