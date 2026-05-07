@@ -41,10 +41,11 @@ void BitcoinExchange::validateFile(const char* data_file, const char* input_file
 	std::fstream input;
     data.open(data_file, std::fstream::in);
     input.open(input_file, std::fstream::in);
-	if (!data.is_open() || !input.is_open())
+	if (!data.is_open() || !input.is_open()) {
+		data.close();
+		input.close();
 		throw(std::string) "cannot open data.csv or input.txt ";
-	data.close();
-	input.close();
+    }
 	_data = "data.csv";
 	_file = input_file;
 }
@@ -53,22 +54,19 @@ BitcoinExchange::BitcoinExchange() {
 	try {
 		validateFile("data.csv", "input.txt");
 	} catch (std::string e) {
-		std::cerr << e << std::endl;
-		exit(1);
+		throw e;
 	}
 }
 BitcoinExchange::BitcoinExchange(const char* file) : _file(file) {
 	try {
 		validateFile("data.csv", file);
 	} catch (std::string e) {
-		std::cerr << e << std::endl;
-		exit(1);
+		throw e;
 	}
 }
 BitcoinExchange::~BitcoinExchange() {}
 BitcoinExchange::BitcoinExchange(const BitcoinExchange & other) {
-	(void) other;
-	//*this = other;
+	*this = other;
 }
 BitcoinExchange & BitcoinExchange::operator=(const BitcoinExchange & src) {
 	if (this != &src) {

@@ -8,6 +8,9 @@ NAME = RPN
 
 all: $(NAME)
 
+%.o: %.cpp
+		$(CC) $(CPPFLAGS) -c $< -o $@
+
 $(NAME): $(OBJ)
 		$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
 

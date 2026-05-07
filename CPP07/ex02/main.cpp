@@ -91,7 +91,6 @@ int main(int, char**)
     {
         std::cout << e.what() << '\n';
     }
-
     for (int i = 0; i < MAX_VAL; i++)
     {
         numbers[i] = rand();

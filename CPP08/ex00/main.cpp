@@ -4,8 +4,11 @@
 
 int main(void ) {
 	std::vector<int> a;
-	for (int i = 0; i < 10; ++i) {
-		a.push_back(i);
+	for (int i = 0; i < 10000; ++i) {
+        if (i % 2 == 0) {
+        	a.push_back(i);
+        }
+
 	}
 
     try {
@@ -26,11 +29,14 @@ int main(void ) {
 	} catch (const std::exception& e) {
 		std::cout << "Not found in vector: " << e.what() << std::endl;
 	}
-	try {
-		if (*easyfind(a, 20))
-			std::cout << "Found in vector: " << *easyfind(a, 20) << std::endl;
-	} catch (const std::exception& e) {
-		std::cout << "Not found in vector: " << e.what() << std::endl;
-	}
+
+    for (size_t i = 0; i < a.size(); ++i) {
+    	try {
+    		if (*easyfind(a, i))
+    			std::cout << "Found in vector: " << *easyfind(a, i) << std::endl;
+    	} catch (const std::exception& e) {
+    		std::cout << "Not found in vector: " << e.what() << std::endl;
+    	}
+    }
 	return 0;
 }

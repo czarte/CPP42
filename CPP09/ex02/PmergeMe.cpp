@@ -4,6 +4,14 @@
 
 #include "PmergeMe.hpp"
 
+PmergeMe::PmergeMe() {}
+PmergeMe::PmergeMe(const PmergeMe& other) {
+	*this = other;
+}
+PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
+  return *this;
+}
+
 size_t PmergeMe::jacobsthalRecursion(int n) {
 	if (n == 0)
 		return (size_t) 0;

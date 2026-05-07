@@ -1,7 +1,9 @@
 //
 // Created by Vojtěch Parkán on 21.09.2025.
 //
-
+#include <sstream>
+#define SSTR( x ) static_cast< std::ostringstream & >( \
+        ( std::ostringstream() << std::dec << x ) ).str()
 // Default constructor - creates empty array
 template<typename T>
 Array<T>::Array() : _data(NULL), _size(0) {
@@ -38,7 +40,8 @@ Array<T>::~Array() {
 template<typename T>
 T& Array<T>::operator[](unsigned int index) {
     if (index >= _size) {
-        throw std::out_of_range("Index out of bounds");
+        std::string msg = "Index out of bounds: " + SSTR( "i is: " << index );
+        throw std::out_of_range(msg);
     }
     return _data[index];
 }
@@ -47,7 +50,8 @@ T& Array<T>::operator[](unsigned int index) {
 template<typename T>
 const T& Array<T>::operator[](unsigned int index) const {
     if (index >= _size) {
-        throw std::out_of_range("Index out of bounds");
+        std::string msg = "Index out of bounds: " + SSTR( "i is: " << index );
+        throw std::out_of_range(msg);
     }
     return _data[index];
 }

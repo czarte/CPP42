@@ -18,7 +18,11 @@
 #define JAC 33
 
 class PmergeMe {
+	PmergeMe();
+	PmergeMe(const PmergeMe& other);
+    PmergeMe& operator=(const PmergeMe& other);
 public:
+  	~PmergeMe();
 	static bool compareSize(std::pair<int, int> a, std::pair<int, int> b);
 	static size_t jacobsthalRecursion(int n);
 	static std::vector<size_t> jacobsthal();

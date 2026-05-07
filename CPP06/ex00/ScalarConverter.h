@@ -20,10 +20,10 @@ enum ScalarType {
 
 class ScalarConverter {
     private:
+		ScalarConverter();
+		ScalarConverter(const ScalarConverter& other);
+		ScalarConverter& operator=(const ScalarConverter& other);
     public:
-        ScalarConverter();
-        ScalarConverter(const ScalarConverter& other);
-        ScalarConverter& operator=(const ScalarConverter& other);
         ~ScalarConverter();
         static void convert(const std::string& literal);
 		static double to_double(const std::string &s, bool &ok);

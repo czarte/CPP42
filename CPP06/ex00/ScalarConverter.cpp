@@ -7,6 +7,8 @@
 #include <sstream>
 #include <iomanip>
 #include <cstdlib>
+#include <cmath>
+#include <typeinfo>
 
 template <typename T>
 bool is_pos_inf(T num) {

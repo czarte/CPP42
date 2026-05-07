@@ -5,6 +5,12 @@
 #ifndef CPP42_SPAN_HPP
 #define CPP42_SPAN_HPP
 #include <vector>
+#include <cstddef>
+#include <iostream>
+#include <queue>
+#include <climits>
+#include <algorithm>
+#include <limits>
 
 class Span {
 	private:
