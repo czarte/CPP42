@@ -1,173 +1,123 @@
 //
-// Created by Vojtěch Parkán on 26.04.2026.
+// PmergeMe.cpp — non-template implementations:
+//   - g_comparisons definition
+//   - Jacobsthal helper
+//   - argv parsing for both std::deque<int> and std::list<int>
+//   - Driver functions that time the sort and print results
 //
 
 #include "PmergeMe.hpp"
+#include <set>
+#include <sstream>
 
 unsigned long g_comparisons = 0;
 
-size_t PmergeMe::jacobsthal_recursion(int n) {
-	if (n == 0)
-		return (size_t) 0;
-	if (n == 1)
-		return (size_t) 1;
-	else
-		return size_t (PmergeMe::jacobsthal_recursion(n - 1) + 2 * PmergeMe::jacobsthal_recursion(n - 2));
-}
-std::vector<size_t> PmergeMe::jacobsthal() {
+// -------------------------------------------------------------------------
+// Jacobsthal sequence
+// -------------------------------------------------------------------------
+// J_0 = 0, J_1 = 1, J_n = J_{n-1} + 2 * J_{n-2}
+// -> 0, 1, 1, 3, 5, 11, 21, 43, 85, 171, 341, 683, ...
+std::vector<size_t> jacobsthalUpTo(size_t bound) {
 	std::vector<size_t> jv;
-	for (int i = 0; i < JAC; ++i) {
-		size_t n = PmergeMe::jacobsthal_recursion(i);
-		if (n != 0) {
-			jv.push_back(n);
-		}
-
+	jv.push_back(0);
+	jv.push_back(1);
+	while (jv.back() <= bound) {
+		const size_t n  = jv.size();
+		const size_t nv = jv[n - 1] + 2 * jv[n - 2];
+		jv.push_back(nv);
 	}
+	// Add one more so callers can safely look at jv[k] when jv[k-1] <= bound.
+	const size_t n  = jv.size();
+	const size_t nv = jv[n - 1] + 2 * jv[n - 2];
+	jv.push_back(nv);
 	return jv;
 }
-bool PmergeMe::compare_size(std::pair<int, int> a, std::pair<int, int> b) {
-	g_comparisons++;
-	return (a.second < b.second);
+
+// -------------------------------------------------------------------------
+// Argv parsing — accepts a sequence of non-negative integers, rejects
+// duplicates and malformed input.
+// -------------------------------------------------------------------------
+static bool parseInt(const char* s, int& out) {
+	if (!s || !*s) return false;
+	// Disallow leading sign and whitespace; only digits accepted.
+	for (const char* p = s; *p; ++p)
+		if (*p < '0' || *p > '9') return false;
+	// Use strtol to detect overflow.
+	char* endp = 0;
+	long v = std::strtol(s, &endp, 10);
+	if (endp == s || *endp != '\0') return false;
+	if (v < 0 || v > INT_MAX) return false;
+	out = static_cast<int>(v);
+	return true;
 }
-void PmergeMe::printInput(char ** argv, int argc) {
-	std::cout << "Before: ";
+
+template <typename Container>
+static void parseArgvImpl(int argc, char** argv, Container& out) {
+	out.clear();
+	std::set<int> seen;
 	for (int i = 1; i < argc; ++i) {
-		std::cout << argv[i] << " ";
+		int v;
+		if (!parseInt(argv[i], v))
+			throw std::runtime_error("Error");
+		if (!seen.insert(v).second)
+			throw std::runtime_error("Error");  // duplicate
+		out.push_back(v);
 	}
+}
+
+void PmergeMe::parseArgv(int argc, char** argv, std::deque<int>& out) {
+	parseArgvImpl(argc, argv, out);
+}
+
+void PmergeMe::parseArgv(int argc, char** argv, std::list<int>& out) {
+	parseArgvImpl(argc, argv, out);
+}
+
+// -------------------------------------------------------------------------
+// Pretty-printing
+// -------------------------------------------------------------------------
+void PmergeMe::printInput(int argc, char** argv) {
+	std::cout << "Before: ";
+	for (int i = 1; i < argc; ++i)
+		std::cout << argv[i] << " ";
 	std::cout << std::endl;
 }
-void PmergeMe::print_pairs(std::list<std::pair<int, int> > list_pairs) {
-	std::cout << "list_pairs: ";
-	for (std::list<std::pair<int, int> >::iterator it = list_pairs.begin(); it != list_pairs.end(); it++)
-		std::cout << "|" << it->first << ", " << it->second << "| ";
-	std::cout << std::endl;
+
+// -------------------------------------------------------------------------
+// Drivers — parse, sort, time, print.
+// -------------------------------------------------------------------------
+void PmergeMe::runDeque(int argc, char** argv) {
+	std::deque<int> seq;
+	parseArgv(argc, argv, seq);
+
+	g_comparisons = 0;
+	const clock_t t0 = clock();
+	fordJohnsonSort(seq, 1);
+	const clock_t t1 = clock();
+	const double us = static_cast<double>(t1 - t0) * 1e6
+	                / static_cast<double>(CLOCKS_PER_SEC);
+
+	printOutput(seq);
+	std::cout << "Time to process a range of " << seq.size()
+	          << " elements with std::deque : "
+	          << us << " us" << std::endl;
+	std::cout << "Number of comparisons (deque): " << g_comparisons << std::endl;
 }
 
-void mergeSort(std::list<std::pair<int, int> >::iterator start, std::list<std::pair<int, int> >::iterator end, size_t size) {
-	if (size == 0 && start != end)
-		size = std::distance(start, end);
-	if (size == 1)
-		return;
-	size_t firstHalf = size / 2;
-	size_t secondHalf = size - firstHalf;
-	std::list<std::pair<int, int> >::iterator center = start;
-	std::advance(center, firstHalf);
+void PmergeMe::runList(int argc, char** argv) {
+	std::list<int> seq;
+	parseArgv(argc, argv, seq);
 
-	mergeSort(start, center, firstHalf);
-	mergeSort(center, end, secondHalf);
-	std::inplace_merge(start, center, end, &PmergeMe::compare_size);
-	g_comparisons++;
+	g_comparisons = 0;
+	const clock_t t0 = clock();
+	fordJohnsonSort(seq, 1);
+	const clock_t t1 = clock();
+	const double us = static_cast<double>(t1 - t0) * 1e6
+	                / static_cast<double>(CLOCKS_PER_SEC);
+
+	printOutput(seq);
+	std::cout << "Time to process a range of " << seq.size()
+	          << " elements with std::list  : "
+	          << us << " us" << std::endl;
+	std::cout << "Number of comparisons: " << g_comparisons << std::endl;
 }
-
-void mergeSort(std::deque<std::pair<int, int> >::iterator start, std::deque<std::pair<int, int> >::iterator end, size_t size) {
-	if (size == 0 && start != end)
-		size = std::distance(start, end);
-	if (size == 1)
-		return;
-	size_t firstHalf = size / 2;
-	size_t secondHalf = size - firstHalf;
-	std::deque<std::pair<int, int> >::iterator center = start;
-	std::advance(center, firstHalf);
-
-	mergeSort(start, center, firstHalf);
-	mergeSort(center, end, secondHalf);
-	std::inplace_merge(start, center, end, &PmergeMe::compare_size);
-	g_comparisons++;
-}
-
-
-//void createPairs(std::list<std::pair<int, int> > * list_pairs, char ** input, int * additional_value) {
-//	int i = 1;
-//	while (input[i]) {
-//		int x = std::atoi(input[i]);
-//		if (x < 0)
-//			throw std::out_of_range("Only positive values");
-//		if (input[i] && input[i + 1]) {
-//			int y = std::atoi(input[i + 1]);
-//			if (y < 0)
-//				throw std::out_of_range("Only positive values");
-//			std::pair<int, int> temp(x, y);
-//			list_pairs->push_back(temp);
-//			i += 2;
-//		} else {
-//			*additional_value = x;
-//			i++;
-//		}
-//
-//	}
-//}
-//void sortPairs(std::list<std::pair<int, int> > * list_pairs) {
-//	for (std::list<std::pair<int, int> >::iterator it = list_pairs->begin(); it != list_pairs->end(); ++it) {
-//		if (it->first > it->second)
-//		{
-//			int tmp = it->first;
-//			it->first = it->second;
-//			it->second = tmp;
-//		}
-//	}
-//}
-//void initResult(std::list<int> * results, std::list<std::pair<int, int> > list_pairs) {
-//	for (std::list<std::pair<int, int> >::iterator it = list_pairs.begin(); it != list_pairs.end(); ++it) {
-//		results->push_back(it->second);
-//	}
-//	if (!list_pairs.empty()) {
-//		results->push_front(list_pairs.begin()->first);
-//	}
-//}
-//void binary_search_insertion(std::list<int> *results, std::list<int>::iterator end, int val) {
-//	std::list<int>::iterator insert_pos = std::lower_bound(results->begin(), end, val);
-//	results->insert(insert_pos, val);
-///*
-//	std::cout << "result current value: " << val << " : end iterator " << *end << " place to insert: " << *(insert_pos--) << std::endl;
-//	for (std::list<int>::iterator it = results->begin(); it != results->end(); it++) {
-//		std::cout << *it << " ";
-//	}
-//	std::cout << std::endl;
-//*/
-//}
-//void insertIntoResult(std::list<std::pair<int, int> > list_pairs, std::list<int> * results, int additional_value) {
-//	std::vector<size_t> jabobsthal = jacobsthal();
-//	//size_t jabobsthal[] = {1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 349525, 699051, 1398101, 2796203, 5592405, 11184811, 22369621, 44739243, 89478485, 178956971, 357913941, 715827883, 1431655765};
-//	int jacobsthal_index = 1;
-//
-//	std::list<int>::iterator slice_delimiter;
-//	std::list<std::pair<int, int> >::iterator pair_iterator;
-//	std::list<std::pair<int, int> >::iterator last_jacobsthal = list_pairs.begin();
-//
-//	while (jabobsthal[jacobsthal_index] <= list_pairs.size()) {
-//		pair_iterator = list_pairs.begin();
-//		std::advance(pair_iterator, jabobsthal[jacobsthal_index] - 1);
-//		last_jacobsthal = pair_iterator;
-//
-//		int insertion_index = 0;
-//		while (jabobsthal[jacobsthal_index] - insertion_index > jabobsthal[jacobsthal_index - 1]) {
-//			slice_delimiter = std::find(results->begin(), results->end(), pair_iterator->second);
-//			binary_search_insertion(results, slice_delimiter, pair_iterator->first);
-//			pair_iterator--;
-//			insertion_index++;
-//		}
-//		jacobsthal_index++;
-//	}
-//
-//	if (jabobsthal[jacobsthal_index] != list_pairs.size()) {
-//		pair_iterator = list_pairs.end();
-//		if (pair_iterator != list_pairs.begin())
-//			pair_iterator--;
-//		while (pair_iterator != last_jacobsthal) {
-//			slice_delimiter = std::find(results->begin(), results->end(), pair_iterator->first);
-//			binary_search_insertion(results, slice_delimiter, pair_iterator->first);
-//			pair_iterator--;
-//		}
-//	}
-//	if (additional_value != -1) {
-//		binary_search_insertion(results, results->end(), additional_value);
-//	}
-//
-//}
-//void printOutput(std::list<int> results) {
-//	std::cout << "After: ";
-//	for (std::list<int>::iterator it = results.begin(); it != results.end() ; it++) {
-//		std::cout << *it << " ";
-//	}
-//	std::cout << std::endl;
-//}
