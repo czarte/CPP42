@@ -4,6 +4,8 @@
 
 #include "PmergeMe.hpp"
 
+unsigned long g_comparisons = 0;
+
 size_t PmergeMe::jacobsthal_recursion(int n) {
 	if (n == 0)
 		return (size_t) 0;
@@ -24,6 +26,7 @@ std::vector<size_t> PmergeMe::jacobsthal() {
 	return jv;
 }
 bool PmergeMe::compare_size(std::pair<int, int> a, std::pair<int, int> b) {
+	g_comparisons++;
 	return (a.second < b.second);
 }
 void PmergeMe::printInput(char ** argv, int argc) {
@@ -53,6 +56,7 @@ void mergeSort(std::list<std::pair<int, int> >::iterator start, std::list<std::p
 	mergeSort(start, center, firstHalf);
 	mergeSort(center, end, secondHalf);
 	std::inplace_merge(start, center, end, &PmergeMe::compare_size);
+	g_comparisons++;
 }
 
 void mergeSort(std::deque<std::pair<int, int> >::iterator start, std::deque<std::pair<int, int> >::iterator end, size_t size) {
@@ -68,6 +72,7 @@ void mergeSort(std::deque<std::pair<int, int> >::iterator start, std::deque<std:
 	mergeSort(start, center, firstHalf);
 	mergeSort(center, end, secondHalf);
 	std::inplace_merge(start, center, end, &PmergeMe::compare_size);
+	g_comparisons++;
 }
 
 

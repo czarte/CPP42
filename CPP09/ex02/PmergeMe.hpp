@@ -17,6 +17,8 @@
 
 #define JAC 33
 
+extern unsigned long g_comparisons;
+
 class PmergeMe {
 public:
 	static bool compare_size(std::pair<int, int> a, std::pair<int, int> b);
@@ -53,6 +55,7 @@ void createPairs(T * list_pairs, char ** input, int * additional_value) {
 template<typename T, typename IT>
 void sortPairs(T * list_pairs, IT it) {
 	for (it = list_pairs->begin(); it != list_pairs->end(); ++it) {
+		g_comparisons++;
 		if (it->first > it->second)
 		{
 			int tmp = it->first;
@@ -74,14 +77,15 @@ void initResult(M * results, T list_pairs, IT it) {
 template<typename M, typename I, typename IT>
 void binary_search_insertion(M *results, I end, int val, IT insert_pos) {
 	insert_pos = std::lower_bound(results->begin(), end, val);
+	g_comparisons++;
 	results->insert(insert_pos, val);
-/*
+
 	std::cout << "result current value: " << val << " : end iterator " << *end << " place to insert: " << *(insert_pos--) << std::endl;
 	for (std::list<int>::iterator it = results->begin(); it != results->end(); it++) {
 		std::cout << *it << " ";
 	}
 	std::cout << std::endl;
-*/
+
 }
 template<typename T, typename M, typename I, typename JI, typename SD, typename IT>
 void insertIntoResult(T list_pairs, M * results, int additional_value, I pair_iterator, JI last_jacobsthal, SD slice_delimiter, IT insert_pos) {
@@ -90,7 +94,6 @@ void insertIntoResult(T list_pairs, M * results, int additional_value, I pair_it
 	int jacobsthal_index = 1;
 
 	last_jacobsthal = list_pairs.begin();
-
 	while (jabobsthal[jacobsthal_index] <= list_pairs.size()) {
 		pair_iterator = list_pairs.begin();
 		std::advance(pair_iterator, jabobsthal[jacobsthal_index] - 1);
@@ -98,6 +101,7 @@ void insertIntoResult(T list_pairs, M * results, int additional_value, I pair_it
 
 		int insertion_index = 0;
 		while (jabobsthal[jacobsthal_index] - insertion_index > jabobsthal[jacobsthal_index - 1]) {
+			g_comparisons++;
 			slice_delimiter = std::find(results->begin(), results->end(), pair_iterator->second);
 			binary_search_insertion(results, slice_delimiter, pair_iterator->first, insert_pos);
 			pair_iterator--;
@@ -111,12 +115,14 @@ void insertIntoResult(T list_pairs, M * results, int additional_value, I pair_it
 		if (pair_iterator != list_pairs.begin())
 			pair_iterator--;
 		while (pair_iterator != last_jacobsthal) {
+			g_comparisons++;
 			slice_delimiter = std::find(results->begin(), results->end(), pair_iterator->first);
 			binary_search_insertion(results, slice_delimiter, pair_iterator->first, insert_pos);
 			pair_iterator--;
 		}
 	}
 	if (additional_value != -1) {
+		g_comparisons++;
 		binary_search_insertion(results, results->end(), additional_value, insert_pos);
 	}
 }
