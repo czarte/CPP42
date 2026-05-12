@@ -22,18 +22,15 @@ void trim(std::string & str, const std::string & trimChars = whiteSpaces) {
 	trimLeft(str, trimChars);
 }
 
-std::stack<std::string> split(const std::string & s, const std::string & delimiter) {
-	std::stack<std::string> tokens;
-	size_t pos = 0;
-	std::string token;
-	pos = s.find(delimiter);
-	token = s.substr(0, pos);
-	trim(token, whiteSpaces);
-	tokens.push(token);
-	token = s.substr(pos + 1, std::string::npos);
-	trim(token, whiteSpaces);
-	tokens.push(token);
-	return tokens;
+std::pair<std::string, std::string> split(const std::string & s, const std::string & delimiter) {
+	size_t pos = s.find(delimiter);
+	std::string first = s.substr(0, pos);
+	trim(first, whiteSpaces);
+	std::string second;
+	if (pos != std::string::npos)
+		second = s.substr(pos + delimiter.size(), std::string::npos);
+	trim(second, whiteSpaces);
+	return std::make_pair(first, second);
 }
 
 void BitcoinExchange::validateFile(const char* data_file, const char* input_file) {
@@ -88,15 +85,61 @@ bool validateDate(std::string date) {
 			return (false);
 	}
 
-	if (date[5] == '0' && date[6] == '0')
+	std::set<int> months31;
+	months31.insert(1);
+	months31.insert(3);
+	months31.insert(5);
+	months31.insert(7);
+	months31.insert(8);
+	months31.insert(10);
+	months31.insert(12);
+
+	std::set<int> months30;
+	months30.insert(4);
+	months30.insert(6);
+	months30.insert(9);
+	months30.insert(11);
+
+	std::set<int> leapYears;
+	leapYears.insert(1972);
+	leapYears.insert(1976);
+	leapYears.insert(1980);
+	leapYears.insert(1984);
+	leapYears.insert(1988);
+	leapYears.insert(1992);
+	leapYears.insert(1996);
+	leapYears.insert(2000);
+	leapYears.insert(2004);
+	leapYears.insert(2008);
+	leapYears.insert(2012);
+	leapYears.insert(2016);
+	leapYears.insert(2020);
+	leapYears.insert(2024);
+
+	int year = std::atoi(date.substr(0, 4).c_str());
+	int month = std::atoi(date.substr(5, 2).c_str());
+	int day = std::atoi(date.substr(8, 2).c_str());
+
+	if (year < 1970 || year > 2026)
 		return (false);
-	if ((date[5] == '1' && date[6] > '2') || date[5] > '1')
+	if (month < 1 || month > 12)
+		return (false);
+	if (day < 1)
 		return (false);
 
-	if (date[8] == '0' && date[9] == '0')
-		return (false);
-	if ((date[8] == '3' && date[9] > '1') || date[8] > '3')
-		return (false);
+	if (months31.find(month) != months31.end()) {
+		if (day > 31)
+			return (false);
+	}
+	else if (months30.find(month) != months30.end()) {
+		if (day > 30)
+			return (false);
+	}
+	else {
+		int maxDay = (leapYears.find(year) != leapYears.end()) ? 29 : 28;
+		if (day > maxDay)
+			return (false);
+	}
 
 	return (true);
 }
@@ -114,14 +157,13 @@ void BitcoinExchange::runFiledata() {
 		std::string date;
 		std::string token;
 		if (line.find('|') != std::string::npos) {
-			std::stack<std::string> spl = split(line, "|");
-			token = spl.top();
-            spl.pop();
-            date = spl.top();
+			std::pair<std::string, std::string> spl = split(line, "|");
+			date = spl.first;
+			token = spl.second;
 			trim(date, whiteSpaces);
             //std::cout << "DEBUG " << date << " | " << token << std::endl;
 			if (!validateDate(date)) {
-				date = "Error: Wromg Date format " + date;
+				token = "Error: Wrong Date format " + date;
 			}
 			std::istringstream iss(token);
 			iss >> ix;
@@ -161,10 +203,9 @@ void BitcoinExchange::fillExchangedata() {
 		if (line.find("exchange_rate") != std::string::npos) {
 			continue;
 		}
-		std::stack<std::string> spl = split(line, ",");
-        std::string token = spl.top();
-        spl.pop();
-        std::string date = spl.top();
+		std::pair<std::string, std::string> spl = split(line, ",");
+		std::string date = spl.first;
+		std::string token = spl.second;
 		double ix;
 		std::istringstream iss(token);
         //std::cout << "DEBUG RATE " << date << " | " << token << std::endl;

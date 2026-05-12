@@ -7,14 +7,16 @@
 
 #include <iostream>
 #include <map>
+#include <set>
 #include <fstream>
 #include <string>
 #include <sys/types.h>
 #include <sstream>
 #include <ctime>
+#include <cstdlib>
 #include <iomanip>
 #include <algorithm>
-#include <stack>
+#include <utility>
 
 class BitcoinExchange {
 private:
