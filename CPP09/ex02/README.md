@@ -4,6 +4,18 @@ https://medium.com/@mohammad.ali.ibrahim.525/ford-johnson-algorithm-merge-insert
 I'll trace through a concrete example: sorting `[0, 3, 5, 8, 1, 9, 2, 7, 6, 4]`. Watch how the algorithm descends through levels, hits a base case, then unwinds — inserting losers via Jacobsthal-ordered binary search on the way back.
 
 ---
+## WHY Jacobsthal numbers?
+
+Because they're the UNIQUE positive integers satisfying
+
+        J(k) + J(k−1) = 2^(k−1)
+
+which is exactly the position where the FIRST insertion of
+block k lands "for free" at a binary-search sweet spot.
+
+Inserting in descending order within each block then keeps
+ALL subsequent insertions in that block also at sweet spots,
+so no comparison is ever wasted.
 
 ## The Big Picture
 
