@@ -5,6 +5,8 @@ int main(void) {
 	Fixed b(a);
 	Fixed c;
 
+    c = b;
+
 	std::cout << "a value is: " << a.getRawBits() << std::endl;
 	std::cout << "b value is: " << b.getRawBits() << std::endl;
 	std::cout << "c value is: " << c.getRawBits() << std::endl;

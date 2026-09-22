@@ -14,6 +14,7 @@ class ClapTrap {
 		unsigned int energy;
 		unsigned int damage;
 	public:
+        ClapTrap();
 		ClapTrap(std::string name);
 		~ClapTrap();
 		void attack(const std::string& target);

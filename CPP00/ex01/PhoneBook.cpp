@@ -99,14 +99,15 @@ void PhoneBook::printContact(Contact& contact, bool full) {
 	}
 	if (full) {
 		if (name.empty()) {
-			std::cout << "Contact does not exists" << std::endl;
+			std::cout << "Contact does not exists"
+                            << std::endl;
 			return;
 		}
 		std::cout
-				<< "index: " << index + 1  << std::endl
-				<< "name: " << name  << std::endl
-				<< "surname: " << surname  << std::endl
-				<< "nickname: " << nickname  << std::endl;
+			<< "index: " << index + 1  << std::endl
+			<< "name: " << name  << std::endl
+			<< "surname: " << surname  << std::endl
+			<< "nickname: " << nickname  << std::endl;
 		std::string phone =  contact.get_phone();
 		std::string secret = contact.get_secret();
 		std::cout
@@ -114,11 +115,11 @@ void PhoneBook::printContact(Contact& contact, bool full) {
 			<< "secret: " << secret << std::endl;
 	} else {
 		std::cout
-				<< "| " << index + 1 << std::string(9, ' ')
-				<< "| " << name << std::string(10 - name.length(), ' ')
-				<< "| " << surname << std::string(10 - surname.length(), ' ')
-				<< "| " << nickname << std::string(10 - nickname.length(), ' ')
-				<< "|" << std::endl;
+			<< "| " << index + 1 << std::string(9, ' ')
+			<< "| " << name << std::string(10 - name.length(), ' ')
+			<< "| " << surname << std::string(10 - surname.length(), ' ')
+			<< "| " << nickname << std::string(10 - nickname.length(), ' ')
+			<< "|" << std::endl;
 	}
 }
 
@@ -171,12 +172,14 @@ void PhoneBook::search() {
 		printLine(49, '-');
 	}
 	std::string str;
-	std::cout << "Insert index of contact you want to display:" << std::endl;
+	std::cout << "Insert index of contact you want to display:"
+                  << std::endl;
 	std::getline(std::cin, str);
 	std::istringstream iss(str);
 	iss >> idx;
 	if (idx == 0) {
-		std::cout << "Contact index must be only digit from 0 up to 8." << std::endl;
+		std::cout << "Contact index must be only digit from 0 up to 8."
+                    << std::endl;
 		return;
 	}
 	std::cout << "Contact " << idx << std::endl;
@@ -186,7 +189,9 @@ void PhoneBook::search() {
 		PhoneBook::printLine(23, '-');
 		return;
 	} else {
-		std::cout << "insert index from 0 up to 8. Only 8 objects could be stored" << this->input << std::endl;
+		std::cout << "insert index from 0 up to 8. Only 8 objects could be stored"
+                	<< this->input
+                    << std::endl;
 		return;
 	}
 }

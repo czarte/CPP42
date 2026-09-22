@@ -7,7 +7,7 @@
 
 #include "Animal.h"
 
-class WrongAnimal :public Animal {
+class WrongAnimal : public Animal {
     public:
       WrongAnimal();
       ~WrongAnimal();

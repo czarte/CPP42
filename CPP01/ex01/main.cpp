@@ -4,11 +4,11 @@
 #include "Zombie.h"
 
 int main(void) {
-	int horde_cnt = 42;
+	int horde_cnt = 3;
 	Zombie* horde;
 
 	std::cout << std::endl << "Welcom to my Zombie World" << std::endl;
-	horde = Zombie::zombieHorde(horde_cnt, "horde");
+	horde = Zombie::zombieHorde(horde_cnt, "dumb");
 
 	for (int i = 0; i < horde_cnt; ++i) {
 		horde[i].announce();

@@ -9,6 +9,9 @@ ClapTrap::ClapTrap(std::string name): hitpoints(10), energy(10), damage(0) {
 	std::cout << "Default Constructor called" << std::endl;
 }
 
+//TODO assignment operator ClapTrap &operator=(const ClapTrap &src);
+// and copy constructor ClapTrap(ClapTrap const &copy);
+
 ClapTrap::~ClapTrap() {
 	std::cout << "Default Destructor called" << std::endl;
 }
